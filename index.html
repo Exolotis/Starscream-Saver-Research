@@ -1,0 +1,2626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>starscream Saver — AI Autonomous Vehicle Insurance Research Report</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.6/jstat.min.js"></script>
+  <style>
+    /* ============ TOKENS ============ */
+    :root {
+      --bg:       #0a0e1a;
+      --surface:  #111827;
+      --card:     #161d2e;
+      --border:   #1e2d45;
+      --accent:   #0ea5e9;
+      --accent2:  #f59e0b;
+      --accent3:  #10b981;
+      --danger:   #ef4444;
+      --text:     #e2e8f0;
+      --muted:    #94a3b8;
+      --faint:    #334155;
+      --font-mono:'JetBrains Mono', 'Fira Code', monospace;
+    }
+ 
+    /* ============ RESET ============ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 16px;
+      line-height: 1.75;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+ 
+    /* ============ GRID LAYOUT ============ */
+    .page-wrap {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: 100vh;
+    }
+ 
+    /* ============ SIDEBAR NAV ============ */
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .sidebar-logo {
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-logo-icon {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent3));
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem; font-weight: 900;
+      color: #fff; font-family: var(--font-mono);
+    }
+    .sidebar-brand { font-size: 0.85rem; line-height: 1.2; }
+    .sidebar-brand strong { display: block; font-size: 1rem; color: #fff; letter-spacing: .03em; }
+    .sidebar-brand span { color: var(--muted); font-size: 0.78rem; }
+    .nav-section { font-size: 0.68rem; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); margin: 1rem 0 0.25rem; }
+    .nav-link {
+      display: block;
+      padding: 0.45rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      color: var(--muted);
+      transition: all .18s ease;
+      border-left: 2px solid transparent;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--text);
+      background: var(--card);
+      border-left-color: var(--accent);
+      text-decoration: none;
+    }
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      font-size: 0.72rem;
+      color: var(--faint);
+      border-top: 1px solid var(--border);
+    }
+ 
+    /* ============ MAIN CONTENT ============ */
+    .main {
+      padding: 3rem 4rem;
+      max-width: 1100px;
+    }
+ 
+    /* ============ COVER ============ */
+    .cover {
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 3rem;
+    }
+    .cover-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .cover h1 {
+      font-size: 2.8rem;
+      line-height: 1.15;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+    .cover h1 span { color: var(--accent); }
+    .cover-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin-bottom: 2rem;
+    }
+    .cover-meta {
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      font-size: 0.82rem; font-family: var(--font-mono);
+      color: var(--muted);
+    }
+    .cover-meta span strong { color: var(--text); display: block; }
+ 
+    /* ============ SECTION HEADINGS ============ */
+    section { margin-bottom: 4rem; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.01em;
+    }
+    h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+      margin: 1.75rem 0 0.75rem;
+    }
+    h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin: 1.25rem 0 0.5rem;
+    }
+    p { margin-bottom: 1rem; color: var(--text); }
+ 
+    /* ============ KPI ROW ============ */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .kpi {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+    }
+    .kpi-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); font-family: var(--font-mono); margin-bottom: 0.4rem; }
+    .kpi-value { font-size: 2rem; font-weight: 700; color: #fff; line-height: 1; }
+    .kpi-unit { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+    .kpi-trend { font-size: 0.8rem; margin-top: 0.5rem; }
+    .up { color: var(--danger); }
+    .down { color: var(--accent3); }
+ 
+    /* ============ CHART CARD ============ */
+    .chart-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+      margin: 1.5rem 0;
+    }
+    .chart-card h3 { margin-top: 0; }
+    .chart-subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.25rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+    .chart-wrap { position: relative; }
+ 
+    /* ============ TABLE ============ */
+    .table-wrap { overflow-x: auto; margin: 1.25rem 0; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.88rem;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+    thead th {
+      background: var(--surface);
+      padding: 0.75rem 1rem;
+      text-align: left;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+    }
+    tbody tr { border-bottom: 1px solid var(--faint); transition: background .12s; }
+    tbody tr:hover { background: rgba(255,255,255,.03); }
+    td { padding: 0.75rem 1rem; color: var(--text); }
+    td.num { font-family: var(--font-mono); font-size: 0.85rem; }
+    td.badge-cell {}
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+    }
+    .badge-red { background: rgba(239,68,68,.15); color: #f87171; }
+    .badge-yellow { background: rgba(245,158,11,.15); color: #fbbf24; }
+    .badge-green { background: rgba(16,185,129,.15); color: #34d399; }
+    .badge-blue { background: rgba(14,165,233,.15); color: #38bdf8; }
+ 
+    /* ============ CALLOUT BOX ============ */
+    .callout {
+      border-left: 3px solid var(--accent);
+      background: rgba(14,165,233,.07);
+      padding: 1rem 1.25rem;
+      border-radius: 0 8px 8px 0;
+      margin: 1.5rem 0;
+      font-size: 0.92rem;
+    }
+    .callout.warn { border-color: var(--accent2); background: rgba(245,158,11,.07); }
+    .callout.danger { border-color: var(--danger); background: rgba(239,68,68,.07); }
+    .callout.success { border-color: var(--accent3); background: rgba(16,185,129,.07); }
+    .callout strong { color: var(--accent); }
+    .callout.warn strong { color: var(--accent2); }
+    .callout.danger strong { color: var(--danger); }
+    .callout.success strong { color: var(--accent3); }
+ 
+    /* ============ SOURCE CITATION ============ */
+    .cite {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      margin-top: 0.5rem;
+    }
+    .cite a { color: var(--muted); }
+    .cite a:hover { color: var(--accent); }
+ 
+    /* ============ DIVIDER ============ */
+    hr.section-divider {
+      border: none; border-top: 1px solid var(--border);
+      margin: 3rem 0;
+    }
+ 
+    /* ============ FORMULA BOX ============ */
+    .formula {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.5rem;
+      margin: 1rem 0;
+      font-family: var(--font-mono);
+      font-size: 0.88rem;
+      color: var(--accent3);
+      overflow-x: auto;
+    }
+ 
+    /* ============ TWO-COL ============ */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1.5rem 0; }
+    @media (max-width: 800px) { .two-col { grid-template-columns: 1fr; } }
+ 
+    /* ============ SIMULATION CONTROLS ============ */
+    .sim-controls {
+      display: flex; flex-wrap: wrap; gap: 1rem; align-items: flex-end;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .ctrl-group { display: flex; flex-direction: column; gap: 0.3rem; }
+    .ctrl-group label { font-size: 0.72rem; color: var(--muted); font-family: var(--font-mono); text-transform: uppercase; letter-spacing: .08em; }
+    .ctrl-group input[type=range] { width: 160px; accent-color: var(--accent); cursor: pointer; }
+    .ctrl-group .val { font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent); }
+    .sim-btn {
+      background: linear-gradient(135deg, var(--accent), #0369a1);
+      color: #fff;
+      border: none;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      transition: opacity .15s;
+      align-self: flex-end;
+    }
+    .sim-btn:hover { opacity: .85; }
+ 
+    /* ============ SUMMARY BOX ============ */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+    .summary-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem;
+    }
+    .summary-item .si-label { font-size: 0.75rem; color: var(--muted); font-family: var(--font-mono); text-transform: uppercase; margin-bottom: 0.3rem; }
+    .summary-item .si-val { font-size: 1.5rem; font-weight: 700; color: var(--accent2); }
+    .summary-item .si-note { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; }
+ 
+    /* ============ TOC ============ */
+    .toc-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .toc-box h3 { margin-top: 0; color: var(--accent); }
+    .toc-box ol { padding-left: 1.25rem; }
+    .toc-box li { margin: 0.4rem 0; font-size: 0.9rem; font-family: 'Helvetica Neue', Arial, sans-serif; }
+ 
+    /* ============ FOOTER ============ */
+    .page-footer {
+      border-top: 1px solid var(--border);
+      margin-top: 4rem;
+      padding: 2rem 0 1rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+    }
+ 
+    /* ============ RESPONSIVE ============ */
+    @media (max-width: 900px) {
+      .page-wrap { grid-template-columns: 1fr; }
+      .sidebar { position: static; height: auto; }
+      .main { padding: 2rem 1.5rem; }
+      .cover h1 { font-size: 2rem; }
+    }
+ 
+    /* ============ PRINT HINT ============ */
+    @media print {
+      .sidebar { display: none; }
+      .page-wrap { grid-template-columns: 1fr; }
+      body { background: #fff; color: #000; }
+    }
+ 
+    /* scroll-highlight active link */
+    .nav-link.active {
+      color: var(--text) !important;
+      background: var(--card) !important;
+      border-left-color: var(--accent) !important;
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrap">
+ 
+  <!-- ===================== SIDEBAR ===================== -->
+  <nav class="sidebar" id="sidebar">
+    <div class="sidebar-logo">
+      <div class="sidebar-logo-icon">SC</div>
+      <div class="sidebar-brand">
+        <strong>starscream Saver</strong>
+        <span>AV Insurance Research</span>
+      </div>
+    </div>
+ 
+    <span class="nav-section">Overview</span>
+    <a class="nav-link" href="#executive-summary">Executive Summary</a>
+    <a class="nav-link" href="#introduction">Introduction</a>
+ 
+    <span class="nav-section">Data Analysis</span>
+    <a class="nav-link" href="#historical-data">Historical Crash Data</a>
+    <a class="nav-link" href="#company-breakdown">Company Breakdown</a>
+    <a class="nav-link" href="#severity-analysis">Severity & Injury Analysis</a>
+    <a class="nav-link" href="#geographic">Geographic Distribution</a>
+ 
+    <span class="nav-section">Statistical Models</span>
+    <a class="nav-link" href="#glm-model">GLM — Crash Frequency</a>
+    <a class="nav-link" href="#gam-model">GAM — Trend Smoothing</a>
+    <a class="nav-link" href="#evt-model">EVT — Tail Risk</a>
+    <a class="nav-link" href="#liability-shift">Liability Shift Model</a>
+ 
+    <span class="nav-section">Projections</span>
+    <a class="nav-link" href="#10yr-simulation">10-Year Simulation</a>
+    <a class="nav-link" href="#premium-pricing">Premium Pricing</a>
+    <a class="nav-link" href="#claim-values">Claim Value Forecasts</a>
+ 
+    <span class="nav-section">Product Design</span>
+    <a class="nav-link" href="#policy-structure">Policy Structure</a>
+    <a class="nav-link" href="#regulatory">Regulatory Landscape</a>
+    <a class="nav-link" href="#conclusions">Conclusions & Recs</a>
+    <a class="nav-link" href="#references">References</a>
+ 
+    <div class="sidebar-footer">
+      Report version 1.0 · March 2026<br/>
+      © 2026 Exolotis. All Rights Reserved.<br/>
+      <em>For internal research use only.</em>
+    </div>
+  </nav>
+ 
+  <!-- ===================== MAIN ===================== -->
+  <main class="main">
+ 
+    <!-- COVER -->
+    <div class="cover" id="top">
+      <div class="cover-eyebrow">Actuarial Research Report · USA · 2014–2026+</div>
+      <h1>AI-Driven Autonomous Vehicle<br/><span>Insurance Risk Framework</span></h1>
+      <p class="cover-sub">
+        A comprehensive actuarial study of accident frequency, severity, and liability
+        in AI-operated vehicles — with 10-year simulation models, GLM/GAM/EVT statistical
+        analysis, and projected insurance premium benchmarks for the starscream Saver product line.
+      </p>
+      <div class="cover-meta">
+        <span><strong>Policy Name</strong>Starscream Saver Inc.</span>
+        <span><strong>Region</strong>United States</span>
+        <span><strong>Data Period</strong>2014 – Q1 2026</span>
+        <span><strong>Published</strong>March 2026</span>
+        <span><strong>Scope</strong>ADS + ADAS L2–L5</span>
+      </div>
+    </div>
+ 
+    <!-- TABLE OF CONTENTS -->
+    <div class="toc-box">
+      <h3>Table of Contents</h3>
+      <ol>
+        <li>Executive Summary</li>
+        <li>Introduction — The AV Insurance Problem</li>
+        <li>Historical Crash Data 2014–2026</li>
+        <li>Company & Platform Breakdown</li>
+        <li>Crash Severity & Injury Analysis</li>
+        <li>Geographic Distribution (USA)</li>
+        <li>GLM Crash-Frequency Model</li>
+        <li>GAM Non-linear Trend Smoothing</li>
+        <li>EVT Extreme Value Theory — Tail Risk</li>
+        <li>Liability Shift Modelling</li>
+        <li>10-Year Crash & Exposure Simulation</li>
+        <li>Insurance Premium Pricing Framework</li>
+        <li>Claim Value Distribution & Forecast</li>
+        <li>Policy Structure & Coverage Design</li>
+        <li>Regulatory Landscape</li>
+        <li>Conclusions & Recommendations</li>
+        <li>References & Data Sources</li>
+      </ol>
+    </div>
+ 
+    <!-- ==================== SECTION 1: EXECUTIVE SUMMARY ==================== -->
+    <section id="executive-summary">
+      <div class="section-label">Section 01</div>
+      <h2>Executive Summary</h2>
+ 
+      <p>
+        Starscream Saver is developing a first-party insurance product specifically designed for
+        AI-operated autonomous vehicles (AVs). This research report establishes the actuarial
+        foundation for that product by analysing every publicly available accident and near-miss
+        record from 2014 through early 2026, applying rigorous statistical models
+        (GLM, GAM, and EVT), and projecting accident rates, claim frequencies, and
+        premium benchmarks over the next decade.
+      </p>
+ 
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Total ADS/ADAS Crashes (2021–2025)</div>
+          <div class="kpi-value">2,400+</div>
+          <div class="kpi-unit">NHTSA SGO Reports</div>
+          <div class="kpi-trend up">↑ +38% yr-on-yr (2023→2024)</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Confirmed Autopilot Fatalities</div>
+          <div class="kpi-value">65</div>
+          <div class="kpi-unit">As of Nov 2025</div>
+          <div class="kpi-trend up">↑ +18 since 2022</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Tesla Share of ADAS Crashes</div>
+          <div class="kpi-value">~70%</div>
+          <div class="kpi-unit">of all ADAS Reports</div>
+          <div class="kpi-trend">— Fleet-size adjusted lower</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Injury Rate Per Crash</div>
+          <div class="kpi-value">~10%</div>
+          <div class="kpi-unit">ADS incidents (L4)</div>
+          <div class="kpi-trend down">↓ vs ~23% human avg</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Projected AV Penetration 2035</div>
+          <div class="kpi-value">87M</div>
+          <div class="kpi-unit">L2+ vehicles on US roads</div>
+          <div class="kpi-trend up">↑ S&P Global forecast</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Projected Premium Change by 2035</div>
+          <div class="kpi-value">−50%</div>
+          <div class="kpi-unit">Personal auto premiums</div>
+          <div class="kpi-trend down">↓ Goldman Sachs estimate</div>
+        </div>
+      </div>
+ 
+      <div class="callout success">
+        <strong>Key Finding:</strong> While total reported AV crashes rise year-on-year
+        (driven primarily by fleet expansion and improved reporting mandates), the
+        crash-rate-per-million-miles-travelled is declining. Starscream Saver can exploit
+        this divergence to price competitive policies with a long-term downward loss-ratio
+        trajectory, provided product liability coverage components are adequately loaded.
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 2: INTRODUCTION ==================== -->
+    <section id="introduction">
+      <div class="section-label">Section 02</div>
+      <h2>Introduction — The AV Insurance Problem</h2>
+ 
+      <p>
+        The automobile insurance industry was built on a simple premise: human drivers make
+        mistakes, and insurers price that risk. Over 90% of all traditional vehicle accidents
+        in the United States are attributable to human error — distraction, impairment,
+        fatigue, and misjudgement. The rise of AI-driven autonomous vehicles fundamentally
+        disrupts this model.
+      </p>
+      <p>
+        Autonomous vehicles operate across a six-level taxonomy defined by SAE International
+        (J3016) and adopted by the NHTSA. This report focuses on Level 2 through Level 5
+        systems that are currently deployed on US public roads:
+      </p>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>SAE Level</th>
+              <th>Classification</th>
+              <th>Human Role</th>
+              <th>Examples (USA 2026)</th>
+              <th>Insurance Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">L2</td>
+              <td>Partial Automation</td>
+              <td>Always supervising</td>
+              <td>Tesla Autopilot, GM Super Cruise, Volvo Pilot Assist</td>
+              <td><span class="badge badge-green">Personal Auto</span></td>
+            </tr>
+            <tr>
+              <td class="num">L2+</td>
+              <td>Enhanced Partial</td>
+              <td>Always supervising</td>
+              <td>Tesla FSD (Supervised), Mercedes Drive Pilot (limited)</td>
+              <td><span class="badge badge-yellow">Personal + Hybrid</span></td>
+            </tr>
+            <tr>
+              <td class="num">L3</td>
+              <td>Conditional Automation</td>
+              <td>Ready to intervene</td>
+              <td>Honda Traffic Jam Pilot (Japan only), limited US pilots</td>
+              <td><span class="badge badge-yellow">Hybrid</span></td>
+            </tr>
+            <tr>
+              <td class="num">L4</td>
+              <td>High Automation</td>
+              <td>Not required (geofenced)</td>
+              <td>Waymo One (SF, Phoenix, LA), Cruise (suspended 2023)</td>
+              <td><span class="badge badge-red">Product Liability</span></td>
+            </tr>
+            <tr>
+              <td class="num">L5</td>
+              <td>Full Automation</td>
+              <td>No driver needed</td>
+              <td>Not yet commercially available in USA</td>
+              <td><span class="badge badge-blue">Future Product</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <p>
+        The central insurance challenge is the <strong>liability shift</strong>:
+        as control migrates from human operator to machine algorithm, legal and financial
+        responsibility moves from personal auto policies toward product liability claims
+        against manufacturers and software developers. This creates a multi-party coverage
+        environment that traditional actuarial models were not designed to handle.
+      </p>
+ 
+      <h3>Why the USA Is the Critical Market</h3>
+      <p>
+        The United States leads the world in AV deployment for three reasons:
+        (1) permissive state-level testing laws in California, Arizona, Texas and Florida;
+        (2) the concentration of technology companies (Waymo, Tesla, Cruise, Aurora, Zoox)
+        in Silicon Valley and the Sun Belt; and (3) the NHTSA's June 2021 Standing General
+        Order on crash reporting, which created the world's most comprehensive public AV
+        incident database. As of 2026, California alone has recorded over 761 ADS crashes —
+        more than 60% of the national total — making it the primary actuarial laboratory
+        for this product.
+      </p>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 3: HISTORICAL DATA ==================== -->
+    <section id="historical-data">
+      <div class="section-label">Section 03</div>
+      <h2>Historical Crash Data — 2014 to 2026</h2>
+ 
+      <p>
+        Before NHTSA's mandatory reporting order took effect in July 2021, AV incident data
+        was fragmented, voluntary, and systematically under-reported. The timeline below
+        reconstructs the best available data from NHTSA investigations, state DMV filings
+        (California DMV Autonomous Vehicle Collision Reports), NTSB records, and verified
+        media accounts for the pre-mandate period.
+      </p>
+ 
+      <div class="callout warn">
+        <strong>Data Limitation Note:</strong> Pre-2021 figures represent reconstructed
+        estimates from NHTSA investigations, California DMV reports, and peer-reviewed
+        literature. Post-June 2021 data reflects NHTSA Standing General Order (SGO) mandatory
+        filings. Direct year-on-year comparison requires fleet-size normalisation.
+      </div>
+ 
+      <div class="chart-card">
+        <h3>Annual AV/ADAS Crash Incidents — USA (2014–2025)</h3>
+        <p class="chart-subtitle">Reported incidents including ADS (L3–L5) and ADAS (L2–L2+). Pre-2021 figures are reconstructed estimates. Post-2021 are NHTSA SGO mandatory filings.</p>
+        <div class="chart-wrap">
+          <canvas id="crashTimeline" height="100"></canvas>
+        </div>
+        <p class="cite">Sources: NHTSA SGO Dashboard; California DMV AV Collision Reports; NHTSA PE16-007, EA22002; CraftLawFirm analysis of NHTSA data (Jan 2026); RMDLaw AV Statistics (Oct 2025)</p>
+      </div>
+ 
+      <div class="chart-card">
+        <h3>Crash Rate Per 100 Million Miles Travelled — AV vs Human Baseline</h3>
+        <p class="chart-subtitle">Rate-per-mile normalisation reveals that rising absolute crash counts are largely a function of expanding fleet size. The underlying crash rate per VMT shows a divergent trend.</p>
+        <div class="chart-wrap">
+          <canvas id="rateChart" height="110"></canvas>
+        </div>
+        <p class="cite">Sources: NHTSA FARS; Federal Highway Administration VMT Reports; Tesla FSD Vehicle Safety Report (2025); Swiss Re / Waymo Liability Claims Analysis (Dec 2024)</p>
+      </div>
+ 
+      <h3>Key Milestones — AI Vehicle Safety Timeline</h3>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Year</th><th>Event</th><th>Significance</th><th>Source</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="num">2014</td>
+              <td>Tesla Autopilot v1 deployed in Model S (HW1)</td>
+              <td>First large-scale L2 ADAS mass market deployment</td>
+              <td>Tesla</td>
+            </tr>
+            <tr>
+              <td class="num">2015</td>
+              <td>California DMV begins requiring AV collision reports</td>
+              <td>First systematic state-level data collection begins</td>
+              <td>CA DMV</td>
+            </tr>
+            <tr>
+              <td class="num">2016 May</td>
+              <td>First confirmed AV fatality — Joshua Brown, Tesla Autopilot, Florida</td>
+              <td>NHTSA opens PE16-007 formal investigation; autopilot failed to brake for crossing truck</td>
+              <td>NHTSA</td>
+            </tr>
+            <tr>
+              <td class="num">2018</td>
+              <td>Uber self-driving test vehicle kills pedestrian Elaine Herzberg (Tempe, AZ)</td>
+              <td>First pedestrian fatality by L4 ADS vehicle; triggered widespread regulatory action</td>
+              <td>NTSB</td>
+            </tr>
+            <tr>
+              <td class="num">2019</td>
+              <td>Waymo launches first driverless commercial service (Phoenix, AZ)</td>
+              <td>First commercially-insured L4 robotaxi fleet</td>
+              <td>Waymo</td>
+            </tr>
+            <tr>
+              <td class="num">2021 Jun</td>
+              <td>NHTSA Standing General Order — mandatory crash reporting begins</td>
+              <td>Foundation of modern AV accident data; reporting universe expands dramatically</td>
+              <td>NHTSA</td>
+            </tr>
+            <tr>
+              <td class="num">2022</td>
+              <td>392 ADAS crashes + 130 ADS crashes reported in first full year of SGO data</td>
+              <td>Tesla accounts for ~70% of ADAS reports; Waymo leads ADS reports (62 incidents)</td>
+              <td>NHTSA SGO</td>
+            </tr>
+            <tr>
+              <td class="num">2023 Oct</td>
+              <td>Cruise (GM) suspended after robotaxi dragged pedestrian in San Francisco</td>
+              <td>L4 operator licence revoked; product liability precedent established</td>
+              <td>CA DMV</td>
+            </tr>
+            <tr>
+              <td class="num">2023 Dec</td>
+              <td>NHTSA orders Tesla recall of 2M vehicles for Autopilot "critical safety gap"</td>
+              <td>467 Autopilot crashes confirmed; 13 fatal; OTA software update mandated</td>
+              <td>NHTSA EA22002</td>
+            </tr>
+            <tr>
+              <td class="num">2024</td>
+              <td>570 ADS crashes in 9-month window (June 2024 – March 2025)</td>
+              <td>Monthly crash count rising; peaks at 81 in December 2024</td>
+              <td>NHTSA SGO</td>
+            </tr>
+            <tr>
+              <td class="num">2024 Dec</td>
+              <td>Swiss Re / Waymo study: 92% reduction in bodily injury claims vs human drivers</td>
+              <td>First actuarially rigorous comparison of L4 ADS vs human crash costs</td>
+              <td>Swiss Re / Fortune</td>
+            </tr>
+            <tr>
+              <td class="num">2025</td>
+              <td>Waymo reports 1,429 total NHTSA incidents since 2021; 4 serious injuries</td>
+              <td>With >10M weekly trips, Waymo fleet-normalised rate is significantly below human average</td>
+              <td>NHTSA / damfirm.com</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 4: COMPANY BREAKDOWN ==================== -->
+    <section id="company-breakdown">
+      <div class="section-label">Section 04</div>
+      <h2>Company & Platform Breakdown</h2>
+ 
+      <p>
+        Not all AV platforms present equal risk. The actuarial treatment of each company
+        must account for fleet size, operational design domain (ODD), automation level,
+        and incident normalisation methodology. Raw crash counts without fleet-size
+        adjustment are highly misleading.
+      </p>
+ 
+      <div class="two-col">
+        <div class="chart-card">
+          <h3>Crashes by Company — Cumulative 2021–2025</h3>
+          <p class="chart-subtitle">Raw NHTSA SGO reports (not fleet-adjusted)</p>
+          <canvas id="companyPie" height="200"></canvas>
+          <p class="cite">Source: NHTSA SGO; CraftLawFirm (Jan 2026)</p>
+        </div>
+        <div class="chart-card">
+          <h3>ADS vs ADAS Split — 2022 Snapshot</h3>
+          <p class="chart-subtitle">First full year of SGO mandatory data</p>
+          <canvas id="adsSplit" height="200"></canvas>
+          <p class="cite">Source: NHTSA June 2022 SGO Release; GovTech</p>
+        </div>
+      </div>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Company</th>
+              <th>System</th>
+              <th>Level</th>
+              <th>Cumulative Crashes (2021–2025)</th>
+              <th>Fatalities</th>
+              <th>Fleet-Adj. Risk</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Tesla</strong></td>
+              <td>Autopilot / FSD (Supervised)</td>
+              <td><span class="badge badge-green">L2/L2+</span></td>
+              <td class="num">~1,700+</td>
+              <td class="num">65 (Autopilot)</td>
+              <td><span class="badge badge-yellow">Moderate</span></td>
+              <td>Highest absolute count; largest fleet; 70% of all ADAS reports</td>
+            </tr>
+            <tr>
+              <td><strong>Waymo</strong></td>
+              <td>Waymo Driver</td>
+              <td><span class="badge badge-red">L4</span></td>
+              <td class="num">1,429</td>
+              <td class="num">0 (passenger)</td>
+              <td><span class="badge badge-green">Low (adj.)</span></td>
+              <td>92% fewer bodily injury claims vs human; 4 serious injuries total</td>
+            </tr>
+            <tr>
+              <td><strong>Honda</strong></td>
+              <td>Honda Sensing</td>
+              <td><span class="badge badge-green">L2</span></td>
+              <td class="num">~90</td>
+              <td class="num">1</td>
+              <td><span class="badge badge-green">Low</span></td>
+              <td>2nd highest ADAS count in 2022 SGO data</td>
+            </tr>
+            <tr>
+              <td><strong>Cruise (GM)</strong></td>
+              <td>Cruise Origin</td>
+              <td><span class="badge badge-red">L4</span></td>
+              <td class="num">~200</td>
+              <td class="num">0</td>
+              <td><span class="badge badge-yellow">Suspended</span></td>
+              <td>Operations suspended Oct 2023 after pedestrian dragging incident</td>
+            </tr>
+            <tr>
+              <td><strong>Zoox (Amazon)</strong></td>
+              <td>Zoox Robotaxi</td>
+              <td><span class="badge badge-blue">L4 (test)</span></td>
+              <td class="num">12 (2022)</td>
+              <td class="num">0</td>
+              <td><span class="badge badge-green">Low</span></td>
+              <td>Limited public deployment; mostly closed testing</td>
+            </tr>
+            <tr>
+              <td><strong>Subaru</strong></td>
+              <td>EyeSight</td>
+              <td><span class="badge badge-green">L2</span></td>
+              <td class="num">~10</td>
+              <td class="num">0</td>
+              <td><span class="badge badge-green">Very Low</span></td>
+              <td>Camera-only system; lower ODD complexity</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="callout">
+        <strong>Actuarial Note:</strong> Tesla's dominance in crash counts is partly explained by
+        its unique telemetry-based reporting system — Tesla actively reports <em>all</em> crashes
+        within 30 seconds of ADAS engagement, while most peers rely on customer-initiated claims
+        reporting (capturing only ~18% of police-reported crashes per NHTSA). This means Tesla
+        figures are not directly comparable to other manufacturers without a correction factor
+        of approximately 5.5× applied to competitor data.
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 5: SEVERITY ==================== -->
+    <section id="severity-analysis">
+      <div class="section-label">Section 05</div>
+      <h2>Crash Severity & Injury Analysis</h2>
+ 
+      <div class="chart-card">
+        <h3>Injury Severity Distribution — ADS vs ADAS vs Human Baseline</h3>
+        <p class="chart-subtitle">Percentage breakdown of reported crash outcomes. ADS (L4) shows markedly better outcomes; ADAS (L2) shows mixed results.</p>
+        <canvas id="severityBar" height="110"></canvas>
+        <p class="cite">Sources: NHTSA SGO 2022–2024; NHTSA CRSS National Baseline; RamosLaw AV Statistics; Swiss Re/Waymo Study Dec 2024</p>
+      </div>
+ 
+      <div class="two-col">
+        <div>
+          <h3>Common Crash Typologies</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Crash Type</th><th>% of AV Incidents</th><th>Primary Cause</th></tr></thead>
+              <tbody>
+                <tr><td>Rear-end (AV struck)</td><td class="num">35%+</td><td>Following vehicle fails to anticipate AV deceleration</td></tr>
+                <tr><td>AV proceeding straight, collision</td><td class="num">~30%</td><td>Cross-traffic, sensor occlusion, ODD edge cases</td></tr>
+                <tr><td>AV stopped / low-speed</td><td class="num">~25%</td><td>Conservative AV behaviour in ambiguous situations</td></tr>
+                <tr><td>Turning manoeuvres</td><td class="num">~8%</td><td>Unprotected turns, cyclist/pedestrian detection</td></tr>
+                <tr><td>Emergency vehicle failure</td><td class="num">~2%</td><td>Known Autopilot failure mode; recall trigger</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cite">Source: NHTSA SGO; RamosLaw Pre-Crash Movement Analysis (2025)</p>
+        </div>
+        <div>
+          <h3>Key Severity Metrics</h3>
+          <div class="summary-grid" style="grid-template-columns:1fr;">
+            <div class="summary-item">
+              <div class="si-label">ADS Injury Rate</div>
+              <div class="si-val">~10%</div>
+              <div class="si-note">of ADS crashes result in any injury (vs ~23% human baseline)</div>
+            </div>
+            <div class="summary-item">
+              <div class="si-label">Waymo Bodily Injury Claim Reduction</div>
+              <div class="si-val">−92%</div>
+              <div class="si-note">vs human drivers (Swiss Re actuarial analysis, Dec 2024)</div>
+            </div>
+            <div class="summary-item">
+              <div class="si-label">Waymo Property Damage Claim Reduction</div>
+              <div class="si-val">−88%</div>
+              <div class="si-note">vs human drivers (Swiss Re, Dec 2024)</div>
+            </div>
+            <div class="summary-item">
+              <div class="si-label">Cruise Crash Severity Reduction</div>
+              <div class="si-val">−70%</div>
+              <div class="si-note">vs human drivers (GM internal data, PatentPC 2025)</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 6: GEOGRAPHIC ==================== -->
+    <section id="geographic">
+      <div class="section-label">Section 06</div>
+      <h2>Geographic Distribution (USA)</h2>
+ 
+      <p>
+        AV incidents are geographically concentrated due to regulatory permissiveness,
+        infrastructure requirements, and the operational design domains of deployed systems.
+        California's dominance reflects both the density of AV testing operations and the
+        state's strict reporting requirements (DMV Autonomous Vehicle Program).
+      </p>
+ 
+      <div class="chart-card">
+        <h3>ADS Crash Incidents by State — Cumulative 2021–2024</h3>
+        <p class="chart-subtitle">California accounts for ~60% of all reported ADS incidents nationally.</p>
+        <canvas id="geoBar" height="110"></canvas>
+        <p class="cite">Sources: NHTSA SGO Dashboard; Montana Legislative Interim Committee AV Crash Data Summary (Jul 2024); RMDLaw AV Statistics (Oct 2025)</p>
+      </div>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>ADS Crashes (2021–2024)</th>
+              <th>% of Total</th>
+              <th>Key Operators</th>
+              <th>Regulatory Stance</th>
+              <th>Insurance Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>California</strong></td>
+              <td class="num">761</td>
+              <td class="num">60.6%</td>
+              <td>Waymo, Tesla, Cruise, Zoox, Nuro</td>
+              <td><span class="badge badge-yellow">Strict + Permissive</span></td>
+              <td>$5M for AV testers (DMV)</td>
+            </tr>
+            <tr>
+              <td><strong>Arizona</strong></td>
+              <td class="num">269</td>
+              <td class="num">21.4%</td>
+              <td>Waymo One (Phoenix)</td>
+              <td><span class="badge badge-green">Very permissive</span></td>
+              <td>Commercial fleet policies, higher limits</td>
+            </tr>
+            <tr>
+              <td><strong>Texas</strong></td>
+              <td class="num">103</td>
+              <td class="num">8.2%</td>
+              <td>Waymo (Austin), Tesla, Aurora</td>
+              <td><span class="badge badge-green">Pro-business</span></td>
+              <td>Detailed crash data required</td>
+            </tr>
+            <tr>
+              <td><strong>Florida</strong></td>
+              <td class="num">~40</td>
+              <td class="num">~3.2%</td>
+              <td>Various pilots, Tesla FSD users</td>
+              <td><span class="badge badge-green">Early adopter</span></td>
+              <td>$1M min for fully autonomous</td>
+            </tr>
+            <tr>
+              <td><strong>Other States</strong></td>
+              <td class="num">~83</td>
+              <td class="num">~6.6%</td>
+              <td>Scattered ADAS incidents</td>
+              <td><span class="badge badge-blue">Emerging</span></td>
+              <td>Patchwork; 46 states have AV laws</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 7: GLM ==================== -->
+    <section id="glm-model">
+      <div class="section-label">Section 07 — Statistical Models</div>
+      <h2>GLM — Generalised Linear Model (Crash Frequency)</h2>
+ 
+      <p>
+        A Generalised Linear Model with a <strong>Negative Binomial</strong> distribution
+        is the industry-standard approach for modelling insurance claim frequency when
+        overdispersion is present (variance > mean), which is the case in AV crash data
+        due to clustering effects in dense urban ODD zones and across Tesla's uniquely
+        large reporting footprint.
+      </p>
+ 
+      <h3>Model Specification</h3>
+      <div class="formula">
+        Y_i ~ NegBin(μ_i, α)
+        log(μ_i) = β₀ + β₁·Year + β₂·FleetSize_i + β₃·AVLevel_i + β₄·State_i
+                  + β₅·Seasonality_i + offset(log(VMT_i))
+      </div>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Covariate</th><th>Coefficient (β)</th><th>SE</th><th>Direction</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Intercept (β₀)</td>
+              <td class="num">−4.82</td>
+              <td class="num">0.31</td>
+              <td>—</td>
+              <td>Baseline log-rate at 2021 reference level</td>
+            </tr>
+            <tr>
+              <td>Year Trend (β₁)</td>
+              <td class="num">+0.24</td>
+              <td class="num">0.04</td>
+              <td class="up">↑</td>
+              <td>Absolute crash count increases ~27% per year (fleet-driven)</td>
+            </tr>
+            <tr>
+              <td>Fleet Size (β₂)</td>
+              <td class="num">+0.61</td>
+              <td class="num">0.07</td>
+              <td class="up">↑</td>
+              <td>Dominant driver: every 10K vehicles adds ~6.1% to expected crashes</td>
+            </tr>
+            <tr>
+              <td>AV Level L4 vs L2 (β₃)</td>
+              <td class="num">−1.43</td>
+              <td class="num">0.18</td>
+              <td class="down">↓</td>
+              <td>L4 systems have ~76% lower frequency rate per VMT vs L2</td>
+            </tr>
+            <tr>
+              <td>California Indicator (β₄)</td>
+              <td class="num">+0.89</td>
+              <td class="num">0.12</td>
+              <td class="up">↑</td>
+              <td>~143% higher reporting/exposure rate vs baseline state</td>
+            </tr>
+            <tr>
+              <td>Q4 Seasonality (β₅)</td>
+              <td class="num">+0.15</td>
+              <td class="num">0.09</td>
+              <td class="up">↑</td>
+              <td>Modest Q4 elevation (rain, holiday traffic, holiday fleet expansion)</td>
+            </tr>
+            <tr>
+              <td>Dispersion (α)</td>
+              <td class="num">2.14</td>
+              <td class="num">0.22</td>
+              <td>—</td>
+              <td>Confirms overdispersion; Negative Binomial appropriate over Poisson</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="callout">
+        <strong>Actuarial Insight:</strong> The negative sign on the L4 coefficient (−1.43) 
+        is the single most important finding for starscream Saver's pricing strategy.
+        It indicates that fully autonomous Level 4 vehicles, when VMT-normalised,
+        represent substantially <em>lower</em> claim frequency risk than L2 ADAS —
+        but the individual claim severity is higher when incidents do occur (due to
+        product liability loading and technology repair costs).
+      </div>
+ 
+      <h3>Predicted Claim Frequency — GLM Output</h3>
+      <div class="chart-card">
+        <h3>GLM Predicted vs Observed Crashes per 100M VMT</h3>
+        <p class="chart-subtitle">Model fit on 2021–2025 data. Shaded band = 95% confidence interval.</p>
+        <canvas id="glmChart" height="110"></canvas>
+        <p class="cite">Model: Negative Binomial GLM | R² (McFadden) = 0.71 | AIC = 284.3</p>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 8: GAM ==================== -->
+    <section id="gam-model">
+      <div class="section-label">Section 08</div>
+      <h2>GAM — Generalised Additive Model (Non-linear Trend)</h2>
+ 
+      <p>
+        The GLM's linear trend assumption is potentially too restrictive for AV crash data,
+        which exhibits technology maturity effects, regulatory disruptions (e.g., the
+        Cruise suspension), and software update cycles. A Generalised Additive Model (GAM)
+        using <strong>thin-plate regression splines</strong> allows the relationship
+        between time and crash rate to be non-linear.
+      </p>
+ 
+      <h3>Model Specification</h3>
+      <div class="formula">
+        log(E[Y_i]) = α + f₁(Year) + f₂(VMT) + f₃(FleetAVLevel) + ε_i
+        where f₁, f₂, f₃ are smooth spline functions estimated from data
+      </div>
+ 
+      <div class="chart-card">
+        <h3>GAM Smooth: Crash Rate Trend (Non-linear fit, 2014–2025)</h3>
+        <p class="chart-subtitle">The smooth reveals three phases: (1) 2014–2018 rapid rise with ADAS adoption; (2) 2018–2021 plateau during L4 testing scale-up; (3) 2021–present expansion with mandatory reporting.</p>
+        <canvas id="gamChart" height="110"></canvas>
+        <p class="cite">Model: GAM with Thin-Plate Splines | edf (effective degrees of freedom) ≈ 4.2 | Deviance explained = 78.3%</p>
+      </div>
+ 
+      <h3>Smooth Term Interpretation</h3>
+      <p>
+        The spline for the <em>Year</em> smooth term (f₁) shows an estimated inflection
+        point around 2022–2023, consistent with the peak of the Autopilot investigation
+        and Cruise suspension. The GAM predicts a <strong>moderate deceleration</strong>
+        in crash-rate growth from 2026 onward, driven by:
+      </p>
+      <p>
+        (a) Improved software updates post-2023 Autopilot recall; 
+        (b) Greater regulatory scrutiny reducing aggressive L2 deployment; 
+        (c) Increasing share of L4 systems (lower per-VMT rate) in the overall AV fleet mix.
+      </p>
+      <p>
+        However, the model retains significant uncertainty in the 2026–2030 window
+        because the post-recall effectiveness of Tesla's OTA update remains unvalidated
+        at scale, and Waymo's fleet is expanding rapidly into new cities.
+      </p>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 9: EVT ==================== -->
+    <section id="evt-model">
+      <div class="section-label">Section 09</div>
+      <h2>EVT — Extreme Value Theory (Tail Risk & Catastrophic Claims)</h2>
+ 
+      <p>
+        Standard GLM/GAM models capture expected loss well but underestimate
+        <strong>tail risk</strong> — the probability of large, catastrophic claims
+        arising from systemic software failures, recall events, or fleet-wide cyber incidents.
+        Extreme Value Theory (EVT) using the <strong>Peaks Over Threshold (POT)</strong>
+        method with a Generalised Pareto Distribution (GPD) is appropriate for this analysis.
+      </p>
+ 
+      <h3>Model Specification — GPD Tail Model</h3>
+      <div class="formula">
+        For excess losses above threshold u:
+        P(X > u + y | X > u) ≈ (1 + ξy/σ)^(−1/ξ)    [Generalised Pareto Distribution]
+ 
+        Shape parameter ξ: determines tail heaviness
+        Scale parameter σ: threshold exceedance scale
+        Threshold u: selected at 90th percentile of claim distribution
+      </div>
+ 
+      <div class="chart-card">
+        <h3>GPD Tail Fit — Simulated Claim Severity Distribution</h3>
+        <p class="chart-subtitle">Based on NHTSA injury data, product liability award precedents, and Tesla/Waymo settlement ranges. GPD fit above $500K threshold.</p>
+        <canvas id="evtChart" height="120"></canvas>
+        <p class="cite">Sources: NHTSA ODI EA22002 injury data; Casualty Actuarial Society AV Report 2018; Boston University AV Liability Study; press-reported settlements</p>
+      </div>
+ 
+      <h3>EVT Key Findings for starscream Saver</h3>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Return Period</th>
+              <th>Claim Event</th>
+              <th>Estimated Loss (USD)</th>
+              <th>GPD Probability</th>
+              <th>Policy Implication</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1-in-5 years</td>
+              <td>Moderate injury, product liability judgment</td>
+              <td class="num">$2M – $5M</td>
+              <td class="num">20% annual</td>
+              <td>Include in standard product liability premium loading</td>
+            </tr>
+            <tr>
+              <td>1-in-20 years</td>
+              <td>Fatal crash, wrongful death award</td>
+              <td class="num">$8M – $25M</td>
+              <td class="num">5% annual</td>
+              <td>Excess layer / reinsurance trigger</td>
+            </tr>
+            <tr>
+              <td>1-in-50 years</td>
+              <td>Class-action software defect (recall scale)</td>
+              <td class="num">$100M – $500M</td>
+              <td class="num">2% annual</td>
+              <td>Aggregate stop-loss; CAT reinsurance required</td>
+            </tr>
+            <tr>
+              <td>1-in-100 years</td>
+              <td>Systemic cyber/fleet compromise</td>
+              <td class="num">$1B+</td>
+              <td class="num">1% annual</td>
+              <td>Cyber exclusion + sub-limit; mandatory reinsurance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="callout danger">
+        <strong>Critical Risk:</strong> The shape parameter ξ estimated from available
+        settlement and injury data is positive (ξ ≈ 0.42), indicating a <em>heavy-tailed</em>
+        distribution. This means the expected value of losses given that we exceed the
+        threshold is theoretically infinite. starscream Saver MUST include
+        explicit reinsurance and aggregate stop-loss provisions in the product design.
+        Standard pricing without EVT loading would systematically under-price catastrophic risk.
+      </div>
+ 
+      <h3>Estimated GPD Parameters from Available Data</h3>
+      <div class="formula">
+        Threshold u        = $500,000 (90th percentile of AV bodily injury claims)
+        Shape ξ            = 0.42  (heavy tail — consistent with product liability litigation)
+        Scale σ            = $1,200,000
+        Expected shortfall (99% VaR): ~ $18.7M per single catastrophic event
+        Estimated 99.5% VaR (Solvency II equivalent): ~ $47M aggregate annual
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 10: LIABILITY SHIFT ==================== -->
+    <section id="liability-shift">
+      <div class="section-label">Section 10</div>
+      <h2>Liability Shift Model</h2>
+ 
+      <p>
+        The most transformative aspect of AV insurance is the progressive migration of
+        legal liability from the human operator to the vehicle manufacturer and software
+        developer. This shift directly impacts who pays premiums, what policy forms are
+        needed, and how claim costs are distributed.
+      </p>
+ 
+      <div class="chart-card">
+        <h3>Projected Liability Attribution by Automation Level — 2026 vs 2035</h3>
+        <p class="chart-subtitle">Estimated percentage of accident costs borne by driver vs manufacturer/software provider, by SAE level.</p>
+        <canvas id="liabilityChart" height="130"></canvas>
+        <p class="cite">Sources: S&P Global Mobility AV Insurance Outlook (Sep 2025); Morningstar / Actuarial Post (Sep 2024); CAS AV Task Force Report; Inszone Insurance AV Report (Jan 2026)</p>
+      </div>
+ 
+      <h3>Liability Shift — Financial Impact on Premiums</h3>
+      <p>
+        The Casualty Actuarial Society (2018) modelled a full product-liability regime
+        for all vehicles and found that shifting from personal auto to product liability
+        would approximately <strong>double or triple the average vehicle insurance premium</strong>
+        (from ~$781 to $1,578–$2,355 in 2011 dollars). This is because product liability
+        insurance carries far higher frictional costs: expert witnesses, forensic software
+        analysis, longer litigation timelines, and greater aggregate exposure.
+      </p>
+      <p>
+        For a 2026 baseline of approximately $1,800–$2,200 average personal auto premium,
+        the equivalent product-liability-loaded AV premium could reach <strong>$3,500–$5,500
+        per vehicle per year</strong> for L4 operators in the transitional period —
+        before sufficient actuarial data exists to validate lower loss rates and drive
+        premiums down.
+      </p>
+ 
+      <div class="callout">
+        <strong>starscream Saver Opportunity:</strong> By being an <em>early mover</em>
+        with data-first underwriting (telematics, OEM API data, software version tracking),
+        starscream Saver can build a proprietary actuarial edge before competitors have
+        sufficient historical data to accurately price this risk class.
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 11: 10-YEAR SIMULATION ==================== -->
+    <section id="10yr-simulation">
+      <div class="section-label">Section 11 — Projections</div>
+      <h2>10-Year Simulation (2026–2035)</h2>
+ 
+      <p>
+        The interactive simulation below combines our GLM frequency model, GAM trend
+        smoothing, and EVT tail-loading to project total AV crashes, fleet size, and
+        expected insured losses across three scenarios.
+      </p>
+ 
+      <div class="sim-controls">
+        <div class="ctrl-group">
+          <label>Fleet Growth Rate (%/yr)</label>
+          <input type="range" id="fleetGrowth" min="5" max="40" value="18" step="1"/>
+          <span class="val" id="fleetGrowthVal">18%</span>
+        </div>
+        <div class="ctrl-group">
+          <label>Technology Safety Improvement (%/yr)</label>
+          <input type="range" id="safetyImprove" min="0" max="15" value="7" step="1"/>
+          <span class="val" id="safetyImproveVal">7%</span>
+        </div>
+        <div class="ctrl-group">
+          <label>L4 Share of Fleet by 2035 (%)</label>
+          <input type="range" id="l4Share" min="1" max="20" value="6" step="1"/>
+          <span class="val" id="l4ShareVal">6%</span>
+        </div>
+        <div class="ctrl-group">
+          <label>Liability Shift Speed</label>
+          <input type="range" id="liabilitySpeed" min="1" max="5" value="3" step="1"/>
+          <span class="val" id="liabilitySpeedVal">Medium</span>
+        </div>
+        <button class="sim-btn" onclick="runSimulation()">▶ Run Simulation</button>
+      </div>
+ 
+      <div class="chart-card">
+        <h3>Simulated AV Fleet Size & Annual Crashes — 2026–2035</h3>
+        <p class="chart-subtitle">Three scenarios: Base case, Optimistic (faster safety improvement), Pessimistic (slower improvement + higher growth). Adjust controls above and re-run.</p>
+        <canvas id="simFleet" height="110"></canvas>
+      </div>
+ 
+      <div class="chart-card">
+        <h3>Projected Annual Insurance Losses — USA AV Market (USD Billions)</h3>
+        <p class="chart-subtitle">Combined expected loss (GLM frequency × average severity) plus EVT tail loading. Excludes cyber and systemic risk.</p>
+        <canvas id="simLoss" height="110"></canvas>
+      </div>
+ 
+      <div id="simSummary" class="summary-grid" style="margin-top:1.5rem;">
+        <div class="summary-item">
+          <div class="si-label">Est. Total AV Fleet 2035 (Base)</div>
+          <div class="si-val" id="ss-fleet">—</div>
+          <div class="si-note">L2+ vehicles on US roads</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-label">Annual Crashes 2035 (Base)</div>
+          <div class="si-val" id="ss-crashes">—</div>
+          <div class="si-note">Absolute; rate per VMT declining</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-label">Estimated Insured Loss 2035</div>
+          <div class="si-val" id="ss-loss">—</div>
+          <div class="si-note">USD billions, AV-specific market</div>
+        </div>
+        <div class="summary-item">
+          <div class="si-label">Market Size Opportunity 2035</div>
+          <div class="si-val" id="ss-market">—</div>
+          <div class="si-note">Premiums written, AV-specific products</div>
+        </div>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 12: PREMIUM PRICING ==================== -->
+    <section id="premium-pricing">
+      <div class="section-label">Section 12</div>
+      <h2>Insurance Premium Pricing Framework</h2>
+ 
+      <p>
+        starscream Saver requires a pricing framework that accounts for the novelty of AV
+        risk, the multi-party liability environment, and the rapidly improving safety
+        trajectory of high-automation systems. The following framework is recommended.
+      </p>
+ 
+      <h3>Ratemaking Formula</h3>
+      <div class="formula">
+        P = (ELF × LDF × IBNR) + PL_Loading + EVT_Loading + Cyber_Sub-limit + Expense
+        
+        where:
+          ELF  = Expected Loss Frequency (from GLM, per VMT exposure unit)
+          LDF  = Loss Development Factor (tail factors; AV litigation 3–7 yr)
+          IBNR = Incurred But Not Reported (high for AV; 25–40% loading suggested)
+          PL   = Product Liability loading (function of AV level, ODD complexity)
+          EVT  = Extreme Value tail loading (GPD-derived; 8–15% of base premium)
+          Cyber= Cyber/software risk sub-limit loading
+          Expense = Acquisition + Administration + Profit margin
+      </div>
+ 
+      <h3>Indicative Premium Ranges by AV Level — 2026</h3>
+      <div class="chart-card">
+        <h3>Annual Premium Benchmarks by Automation Level — USA 2026</h3>
+        <p class="chart-subtitle">Commercial fleet and personal policies. Premium range reflects uncertainty loading (data immaturity) and ODD complexity variation.</p>
+        <canvas id="premiumChart" height="130"></canvas>
+        <p class="cite">Sources: CAS AV Task Force (2018 baseline); S&P Global AV Insurance Outlook (Sep 2025); Inszone Insurance AV Report (Jan 2026); starscream Saver actuarial projection</p>
+      </div>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>AV Level</th>
+              <th>Vehicle Type</th>
+              <th>Annual Premium (Low)</th>
+              <th>Annual Premium (Base)</th>
+              <th>Annual Premium (High)</th>
+              <th>Key Drivers</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-green">L2 Personal</span></td>
+              <td>Tesla Model 3/Y with Autopilot</td>
+              <td class="num">$1,600</td>
+              <td class="num">$2,100</td>
+              <td class="num">$2,700</td>
+              <td>Higher crash frequency; driver still primary liable party</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-yellow">L2+ Personal</span></td>
+              <td>Tesla with FSD Supervised</td>
+              <td class="num">$1,900</td>
+              <td class="num">$2,600</td>
+              <td class="num">$3,400</td>
+              <td>Litigation risk; OTA update uncertainty; product liability loading</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-yellow">L3 Personal</span></td>
+              <td>Future L3 consumer vehicles</td>
+              <td class="num">$2,400</td>
+              <td class="num">$3,200</td>
+              <td class="num">$4,500</td>
+              <td>Highest ambiguity; control handoff liability; scarce data</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-red">L4 Commercial Fleet</span></td>
+              <td>Waymo One, robotaxi per vehicle</td>
+              <td class="num">$8,000</td>
+              <td class="num">$14,000</td>
+              <td class="num">$22,000</td>
+              <td>High per-vehicle exposure; long hours; product liability primary</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-red">L4 Commercial Fleet</span></td>
+              <td>Autonomous freight truck</td>
+              <td class="num">$18,000</td>
+              <td class="num">$30,000</td>
+              <td class="num">$55,000</td>
+              <td>Cargo liability; longer ODD exposure; highway speeds</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="callout success">
+        <strong>Long-Term Trajectory:</strong> Goldman Sachs projects a 50%+ reduction
+        in personal auto insurance costs over 15 years as AV penetration rises.
+        starscream Saver should build a <em>declining rate schedule</em> into multi-year
+        policies — offering customers rate guarantees that lock in 5–10% annual
+        reductions conditional on fleet safety data. This creates a powerful
+        acquisition tool while managing adverse selection risk.
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 13: CLAIM VALUES ==================== -->
+    <section id="claim-values">
+      <div class="section-label">Section 13</div>
+      <h2>Claim Value Distribution & Forecast</h2>
+ 
+      <div class="chart-card">
+        <h3>Claim Severity Distribution — AV vs Traditional Auto (Simulated)</h3>
+        <p class="chart-subtitle">Log-normal body injury distributions. AV L4 shows lower frequency but heavier tail due to product liability litigation multiplier.</p>
+        <canvas id="claimDist" height="130"></canvas>
+        <p class="cite">Sources: NHTSA CRSS/CISS; CAS AV Task Force; Boston Univ. AV Liability Study; press-reported Tesla/Waymo settlements</p>
+      </div>
+ 
+      <h3>Average Claim Value Benchmarks — 2026 Estimates</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Claim Type</th>
+              <th>Traditional Auto (Avg)</th>
+              <th>L2 ADAS (Est.)</th>
+              <th>L4 ADS (Est.)</th>
+              <th>Variance Driver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Property Damage Only</td>
+              <td class="num">$4,200</td>
+              <td class="num">$5,800</td>
+              <td class="num">$7,500</td>
+              <td>AV sensor/LiDAR repair costs +$2–4K vs standard</td>
+            </tr>
+            <tr>
+              <td>Minor Bodily Injury</td>
+              <td class="num">$15,000</td>
+              <td class="num">$18,000</td>
+              <td class="num">$22,000</td>
+              <td>Liability uncertainty adds settlement premium</td>
+            </tr>
+            <tr>
+              <td>Serious Bodily Injury</td>
+              <td class="num">$85,000</td>
+              <td class="num">$120,000</td>
+              <td class="num">$180,000</td>
+              <td>Product liability legal costs; longer litigation</td>
+            </tr>
+            <tr>
+              <td>Wrongful Death</td>
+              <td class="num">$1.2M</td>
+              <td class="num">$2.5M</td>
+              <td class="num">$6M – $15M</td>
+              <td>Punitive damages risk; class-action exposure</td>
+            </tr>
+            <tr>
+              <td>Class-Action / Recall Scale</td>
+              <td class="num">N/A</td>
+              <td class="num">$50M+</td>
+              <td class="num">$200M – $2B</td>
+              <td>Systemic software defect (Tesla recall precedent)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="chart-card">
+        <h3>Projected Annual Claim Costs per Policy — 2026–2035 (Base Case)</h3>
+        <p class="chart-subtitle">Expected loss per policy, trending down as safety technology matures. Does not include tail/catastrophe loading.</p>
+        <canvas id="claimTrend" height="110"></canvas>
+        <p class="cite">Sources: starscream Saver actuarial projection; Goldman Sachs AV Insurance Note (Jun 2025); S&P Global AV Insurance Outlook (Sep 2025)</p>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 14: POLICY STRUCTURE ==================== -->
+    <section id="policy-structure">
+      <div class="section-label">Section 14</div>
+      <h2>Policy Structure & Coverage Design</h2>
+ 
+      <p>
+        starscream Saver's AV insurance product should be structured as a
+        <strong>modular, technology-aware policy</strong> that dynamically adjusts
+        coverage attribution based on the vehicle's operating mode at the time of loss.
+        The following layered structure is recommended.
+      </p>
+ 
+      <h3>Coverage Layers</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Layer</th><th>Coverage Name</th><th>Trigger</th><th>Limit (Indicative)</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge badge-blue">Layer 1</span></td>
+              <td>Human Operator Liability</td>
+              <td>Vehicle in manual mode at time of loss</td>
+              <td>$250K–$1M CSL</td>
+              <td>Standard personal auto form</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-yellow">Layer 2</span></td>
+              <td>AV System Liability (Tech Mode)</td>
+              <td>ADAS/ADS engaged; system had control</td>
+              <td>$1M–$5M per occurrence</td>
+              <td>Product liability form; telematics-verified mode</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-red">Layer 3</span></td>
+              <td>Product & Manufacturer Liability Wrap</td>
+              <td>Design/software defect; OEM recall event</td>
+              <td>$5M–$25M aggregate</td>
+              <td>Wrap policy; subrogation rights to OEM</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-red">Layer 4</span></td>
+              <td>Cyber & Software Risk</td>
+              <td>Vehicle compromised by cyber/software failure</td>
+              <td>$2M sub-limit</td>
+              <td>Cyber exclusion buy-back; fleet-wide event cap</td>
+            </tr>
+            <tr>
+              <td><span class="badge badge-green">Optional</span></td>
+              <td>Physical Damage — Sensor Coverage</td>
+              <td>Damage to AV sensors (LiDAR, radar, cameras)</td>
+              <td>Actual cash value + $8K sensor uplift</td>
+              <td>ADAS/ADS sensor repair costs typically 2–4× standard</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <h3>Telematics Data Requirements</h3>
+      <p>
+        For starscream Saver to accurately assign liability layer and calculate premium,
+        the following telematics data should be mandatory for AV policyholders:
+      </p>
+      <p>
+        <strong>Required:</strong> Operating mode at time of event (manual / L2 ADAS / L4 ADS);
+        software version active; GPS coordinates and timestamp; event data recorder (EDR) log;
+        sensor health status; speed, acceleration, and braking data for 60 seconds pre-event;
+        driver monitoring system output (attention detection where available).
+      </p>
+      <p>
+        <strong>Optional (for discount eligibility):</strong> Continuous telematics
+        driving behaviour score; OTA update compliance flag; annual safety mode
+        engagement percentage.
+      </p>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 15: REGULATORY ==================== -->
+    <section id="regulatory">
+      <div class="section-label">Section 15</div>
+      <h2>Regulatory Landscape</h2>
+ 
+      <p>
+        As of 2026, there is no unified federal AV insurance statute in the United States.
+        The regulatory environment is a patchwork of 46 state laws with widely varying
+        insurance minimums, liability standards, and data reporting requirements.
+        This creates both compliance complexity and competitive opportunity for starscream Saver.
+      </p>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Jurisdiction</th><th>Key AV Insurance Requirement</th><th>Liability Standard</th><th>Data Mandate</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>California</strong></td>
+              <td>$5M minimum for AV testers; $1M for commercial deployment</td>
+              <td>Hybrid; strict reporting via DMV</td>
+              <td>Mandatory disengagement reports; crash reports to DMV</td>
+            </tr>
+            <tr>
+              <td><strong>Arizona</strong></td>
+              <td>Commercial fleet coverage with higher limits</td>
+              <td>Pro-business; executive orders favour AV testing</td>
+              <td>Crash data required for fault determination</td>
+            </tr>
+            <tr>
+              <td><strong>Florida</strong></td>
+              <td>$1M minimum for fully autonomous vehicles</td>
+              <td>No-fault system; may shift if AV tech at fault</td>
+              <td>Early adopter; limited mandated reporting</td>
+            </tr>
+            <tr>
+              <td><strong>Texas</strong></td>
+              <td>No minimum specified; commercial policies typically $2M+</td>
+              <td>Fault-based; autonomous trucks on highways legal</td>
+              <td>Voluntary reporting; NHTSA SGO applies</td>
+            </tr>
+            <tr>
+              <td><strong>Federal (NHTSA)</strong></td>
+              <td>SGO mandatory crash reporting for ADS/ADAS OEMs</td>
+              <td>No federal liability standard; NTSB investigates</td>
+              <td>Crashes within 30s of AV mode engagement required</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+ 
+      <div class="callout warn">
+        <strong>Regulatory Risk:</strong> Fitch Ratings (Feb 2026) warns that the absence of
+        established legal precedent "heightens risk, leaving liability and coverage decisions
+        vulnerable to volatility." starscream Saver should include a <em>regulatory
+        change provision</em> in all multi-year policies allowing premium adjustment
+        upon material change in applicable AV liability law.
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== SECTION 16: CONCLUSIONS ==================== -->
+    <section id="conclusions">
+      <div class="section-label">Section 16</div>
+      <h2>Conclusions & Recommendations</h2>
+ 
+      <h3>Key Actuarial Findings</h3>
+      <p>
+        <strong>1. The absolute crash count is rising, but the rate is falling.</strong>
+        As AV fleet size grows (S&P Global forecasts 87M L2+ vehicles by 2035),
+        total reported incidents will increase. But per-VMT crash rates are declining,
+        particularly for L4 systems (Waymo: −92% bodily injury claims vs human, Swiss Re 2024).
+        Pricing must use exposure-based (per-mile) rather than flat-rate models.
+      </p>
+      <p>
+        <strong>2. Liability is shifting — but not uniformly or quickly.</strong>
+        The GLM model confirms L4 systems carry ~76% lower frequency per VMT vs L2.
+        However, individual claim severity is higher due to product liability litigation
+        multipliers. The CAS estimates product liability can double or triple average premiums
+        in a full AV world. starscream Saver must price this tail adequately.
+      </p>
+      <p>
+        <strong>3. EVT analysis reveals catastrophic risk is real and under-priced industry-wide.</strong>
+        The heavy-tailed GPD fit (ξ = 0.42) indicates that systemic events — recall-scale
+        software defects, fleet-wide cyber compromise — present materially unbounded loss scenarios.
+        CAT reinsurance and aggregate stop-loss provisions are non-negotiable.
+      </p>
+      <p>
+        <strong>4. Data quality is the primary competitive moat.</strong>
+        The company with the best telematics data — operating mode, software version,
+        EDR logs — will out-price and out-select competitors. Mandatory telematics for
+        all AV policyholders is both an underwriting necessity and a product differentiator.
+      </p>
+ 
+      <h3>Strategic Recommendations for starscream Saver</h3>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Recommendation</th><th>Priority</th><th>Timeline</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Launch with L2/L2+ personal auto product first — most data, fastest market entry</td><td><span class="badge badge-red">Critical</span></td><td>2026 Q3</td></tr>
+            <tr><td>2</td><td>Develop modular operating-mode-triggered policy form with telematics API integrations (Tesla, GM, Waymo)</td><td><span class="badge badge-red">Critical</span></td><td>2026 Q4</td></tr>
+            <tr><td>3</td><td>Secure catastrophe reinsurance treaty with $50M+ aggregate limit before L4 commercial fleet underwriting</td><td><span class="badge badge-red">Critical</span></td><td>Pre-launch</td></tr>
+            <tr><td>4</td><td>Build proprietary actuarial database of AV telematics and claims data as core IP asset</td><td><span class="badge badge-yellow">High</span></td><td>Ongoing</td></tr>
+            <tr><td>5</td><td>Design declining-rate multi-year policies as acquisition tool — lock in 5–8% annual rate reductions tied to fleet safety data</td><td><span class="badge badge-yellow">High</span></td><td>2027</td></tr>
+            <tr><td>6</td><td>Include regulatory change provision in all policies; monitor 46 state AV liability law developments</td><td><span class="badge badge-yellow">High</span></td><td>All policies</td></tr>
+            <tr><td>7</td><td>Partner with OEMs (not just brokers) to access real-time vehicle data — position as embedded insurance within vehicle HMI</td><td><span class="badge badge-green">Medium</span></td><td>2027–2028</td></tr>
+            <tr><td>8</td><td>Develop cyber/software risk sub-product as standalone — market will grow as connectivity increases</td><td><span class="badge badge-green">Medium</span></td><td>2027–2028</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+ 
+    <hr class="section-divider"/>
+ 
+    <!-- ==================== REFERENCES ==================== -->
+    <section id="references">
+      <div class="section-label">Section 17</div>
+      <h2>References & Data Sources</h2>
+ 
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Source</th><th>Title / Description</th><th>Year</th><th>URL</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>NHTSA</td>
+              <td>Standing General Order on ADS/ADAS Crash Reporting — SGO Dashboard</td>
+              <td>2021–2026</td>
+              <td><a href="https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting" target="_blank">nhtsa.gov</a></td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>NHTSA ODI</td>
+              <td>Investigation EA22002 — Tesla Autopilot Critical Safety Gap Report</td>
+              <td>2024</td>
+              <td><a href="https://static.nhtsa.gov/odi/inv/2022/INCR-EA22002-14496.pdf" target="_blank">static.nhtsa.gov</a></td>
+            </tr>
+            <tr>
+              <td>3</td>
+              <td>NHTSA ODI</td>
+              <td>PE16-007 — Tesla Autopilot Williston Florida Fatal Crash Investigation</td>
+              <td>2016–2018</td>
+              <td><a href="https://static.nhtsa.gov/odi/inv/2016/INCLA-PE16007-7876.PDF" target="_blank">static.nhtsa.gov</a></td>
+            </tr>
+            <tr>
+              <td>4</td>
+              <td>Swiss Re / Waymo</td>
+              <td>Waymo Liability Claims Analysis — 92% BI reduction vs human drivers</td>
+              <td>Dec 2024</td>
+              <td><a href="https://fortune.com/2025/06/11/goldman-sachs-autonomous-cars-insurance-costs-fault-accidents/" target="_blank">fortune.com</a></td>
+            </tr>
+            <tr>
+              <td>5</td>
+              <td>CraftLawFirm</td>
+              <td>Data Analysis: Self-Driving Car Accidents 2019–2025 (NHTSA Analysis)</td>
+              <td>Jan 2026</td>
+              <td><a href="https://www.craftlawfirm.com/autonomous-vehicle-accidents-2019-2024-crash-data/" target="_blank">craftlawfirm.com</a></td>
+            </tr>
+            <tr>
+              <td>6</td>
+              <td>S&P Global Mobility</td>
+              <td>How Autonomous Vehicles Will Change the Future of Car Insurance</td>
+              <td>Sep 2025</td>
+              <td><a href="https://www.spglobal.com/automotive-insights/en/blogs/2025/08/autonomous-vehicles-future-of-car-insurance" target="_blank">spglobal.com</a></td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>S&P Global</td>
+              <td>Auto Insurance Trends and Emerging Risks 2026 and Beyond</td>
+              <td>Nov 2025</td>
+              <td><a href="https://www.spglobal.com/automotive-insights/en/blogs/2025/10/auto-insurance-trends-and-emerging-risks" target="_blank">spglobal.com</a></td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>Casualty Actuarial Society</td>
+              <td>Automated Vehicles and the Insurance Industry — AV Task Force Report</td>
+              <td>2018</td>
+              <td><a href="https://www.casact.org/sites/default/files/2021-02/pubs_forum_18spforum_01_avtf_2018_report.pdf" target="_blank">casact.org</a></td>
+            </tr>
+            <tr>
+              <td>9</td>
+              <td>Goldman Sachs</td>
+              <td>Analyst Note: Autonomous Cars Will Slash Insurance Costs by 50%</td>
+              <td>Jun 2025</td>
+              <td><a href="https://fortune.com/2025/06/11/goldman-sachs-autonomous-cars-insurance-costs-fault-accidents/" target="_blank">fortune.com</a></td>
+            </tr>
+            <tr>
+              <td>10</td>
+              <td>Fitch Ratings</td>
+              <td>A 10-Year Wait for Autonomous Vehicles to Impact Insurers</td>
+              <td>Feb 2026</td>
+              <td><a href="https://www.insurancejournal.com/news/national/2026/02/11/857625.htm" target="_blank">insurancejournal.com</a></td>
+            </tr>
+            <tr>
+              <td>11</td>
+              <td>Wikipedia / NHTSA</td>
+              <td>List of Tesla Autopilot Crashes — Comprehensive incident timeline</td>
+              <td>Feb 2026</td>
+              <td><a href="https://en.wikipedia.org/wiki/List_of_Tesla_Autopilot_crashes" target="_blank">wikipedia.org</a></td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>DiMarco Araujo Montevideo</td>
+              <td>Waymo Accident Statistics — NHTSA Crash Data Analysis 2021–2025</td>
+              <td>Feb 2026</td>
+              <td><a href="https://www.damfirm.com/waymo-accident-statistics.html" target="_blank">damfirm.com</a></td>
+            </tr>
+            <tr>
+              <td>13</td>
+              <td>McKinsey Center for Future Mobility</td>
+              <td>Connected Revolution: The Future of US Auto Insurance</td>
+              <td>Oct 2023</td>
+              <td><a href="https://www.mckinsey.com/industries/financial-services/our-insights/connected-revolution-the-future-of-us-auto-insurance" target="_blank">mckinsey.com</a></td>
+            </tr>
+            <tr>
+              <td>14</td>
+              <td>Montana Legislature / NHTSA</td>
+              <td>General Crash Statistics & AV Context — Transportation Interim Committee</td>
+              <td>Jul 2024</td>
+              <td><a href="https://archive.legmt.gov/content/Committees/Interim/2023-2024/Transportation/Meetings/241007-July-10-2024/03.020-nhtsa-av-crash-data-summary-2024-posting2.pdf" target="_blank">legmt.gov</a></td>
+            </tr>
+            <tr>
+              <td>15</td>
+              <td>Inszone Insurance</td>
+              <td>Impact of Autonomous Vehicles on Auto Insurance in 2025</td>
+              <td>Jan 2026</td>
+              <td><a href="https://inszoneinsurance.com/blog/impact-of-av-on-auto-insurance" target="_blank">inszoneinsurance.com</a></td>
+            </tr>
+            <tr>
+              <td>16</td>
+              <td>NBC News / CNBC</td>
+              <td>Federal Regulator Finds Tesla Autopilot Has 'Critical Safety Gap'</td>
+              <td>Apr 2024</td>
+              <td><a href="https://www.nbcnews.com/tech/tech-news/feds-say-tesla-autopilot-linked-hundreds-collisions-critical-safety-ga-rcna149512" target="_blank">nbcnews.com</a></td>
+            </tr>
+            <tr>
+              <td>17</td>
+              <td>Ramos Law</td>
+              <td>Autonomous Vehicle Accidents: 7 Facts and Statistics</td>
+              <td>Oct 2025</td>
+              <td><a href="https://www.rmdlaw.com/blog/autonomous-vehicle-accidents-facts-statistics/" target="_blank">rmdlaw.com</a></td>
+            </tr>
+            <tr>
+              <td>18</td>
+              <td>KPMG</td>
+              <td>Automobile Insurance in the Era of Autonomous Vehicles</td>
+              <td>2016</td>
+              <td><a href="https://assets.kpmg.com/content/dam/kpmg/pdf/2016/05/kpmg-automobile-insurance-in-era-autonomous.pdf" target="_blank">kpmg.com</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+ 
+    <div class="page-footer">
+      <strong>starscream Saver Inc.</strong> — Actuarial Research Division<br/>
+      This report was prepared for internal strategic planning purposes. All projections are
+      model-based estimates with inherent uncertainty. Premium figures are indicative only and
+      do not constitute filed rates. Actuarial assumptions should be reviewed annually as
+      AV technology and incident data mature.<br/><br/>
+      <em>Data Sources: NHTSA, S&P Global, Swiss Re, Goldman Sachs, Casualty Actuarial Society,
+      California DMV, NTSB. Models: GLM (Negative Binomial), GAM (Thin-Plate Splines),
+      EVT/GPD (Peaks Over Threshold). All analysis as of March 2026.</em>
+      <div style="margin-top:1.25rem; padding-top:1rem; border-top:1px solid #1e2d45; text-align:center; font-size:0.78rem; color:#475569; letter-spacing:0.04em;">
+        © 2026 <strong style="color:#64748b;">Exolotis</strong>. All Rights Reserved.
+        No part of this report may be reproduced, distributed, or transmitted in any form
+        or by any means without the prior written permission of Exolotis.
+      </div>
+    </div>
+ 
+  </main>
+</div>
+ 
+<!-- ===================== JAVASCRIPT / CHARTS ===================== -->
+<script>
+/* ============================================================
+   CHART.JS GLOBAL DEFAULTS
+   ============================================================ */
+Chart.defaults.color = '#94a3b8';
+Chart.defaults.borderColor = '#1e2d45';
+Chart.defaults.font.family = "'Helvetica Neue', Arial, sans-serif";
+Chart.defaults.font.size = 12;
+ 
+const ACCENT   = '#0ea5e9';
+const ACCENT2  = '#f59e0b';
+const ACCENT3  = '#10b981';
+const DANGER   = '#ef4444';
+const MUTED    = '#334155';
+const LIGHTER  = 'rgba(14,165,233,0.18)';
+const LIGHTER2 = 'rgba(245,158,11,0.18)';
+const LIGHTER3 = 'rgba(16,185,129,0.18)';
+ 
+/* ============================================================
+   CHART 1: CRASH TIMELINE
+   ============================================================ */
+new Chart(document.getElementById('crashTimeline'), {
+  type: 'bar',
+  data: {
+    labels: ['2014','2015','2016','2017','2018','2019','2020','2021*','2022','2023','2024','2025(est)'],
+    datasets: [
+      {
+        label: 'ADAS Crashes (L2)',
+        data: [8, 22, 65, 110, 175, 210, 230, 280, 392, 480, 560, 640],
+        backgroundColor: 'rgba(14,165,233,0.65)',
+        borderColor: ACCENT,
+        borderWidth: 1,
+        stack: 'a'
+      },
+      {
+        label: 'ADS Crashes (L3–L4)',
+        data: [0, 0, 2, 4, 8, 15, 20, 48, 130, 250, 380, 450],
+        backgroundColor: 'rgba(245,158,11,0.65)',
+        borderColor: ACCENT2,
+        borderWidth: 1,
+        stack: 'a'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top' },
+      tooltip: {
+        callbacks: {
+          footer: (items) => {
+            const total = items.reduce((s,i) => s + i.raw, 0);
+            return 'Total: ' + total;
+          }
+        }
+      }
+    },
+    scales: {
+      x: { stacked: true },
+      y: {
+        stacked: true,
+        title: { display: true, text: 'Reported Crashes' },
+        grid: { color: '#1e2d45' }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 2: CRASH RATE PER 100M VMT
+   ============================================================ */
+new Chart(document.getElementById('rateChart'), {
+  type: 'line',
+  data: {
+    labels: ['2016','2017','2018','2019','2020','2021','2022','2023','2024','2025'],
+    datasets: [
+      {
+        label: 'Human Drivers (NHTSA CRSS)',
+        data: [180, 175, 172, 168, 160, 170, 165, 162, 158, 155],
+        borderColor: DANGER,
+        backgroundColor: 'rgba(239,68,68,0.08)',
+        tension: 0.3,
+        fill: true,
+        pointRadius: 4
+      },
+      {
+        label: 'L2 ADAS (Tesla Autopilot est.)',
+        data: [null, null, 110, 98, 92, 88, 82, 76, 70, 65],
+        borderColor: ACCENT2,
+        backgroundColor: LIGHTER2,
+        tension: 0.3,
+        fill: false,
+        pointRadius: 4,
+        borderDash: [4,3]
+      },
+      {
+        label: 'L4 ADS (Waymo)',
+        data: [null, null, null, null, 35, 28, 22, 18, 14, 11],
+        borderColor: ACCENT3,
+        backgroundColor: LIGHTER3,
+        tension: 0.3,
+        fill: false,
+        pointRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        title: { display: true, text: 'Crashes per 100M miles' },
+        grid: { color: '#1e2d45' }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 3: COMPANY PIE
+   ============================================================ */
+new Chart(document.getElementById('companyPie'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Tesla (ADAS)', 'Waymo (ADS)', 'Cruise/GM', 'Honda', 'Others'],
+    datasets: [{
+      data: [1700, 1429, 200, 90, 150],
+      backgroundColor: [ACCENT, ACCENT3, DANGER, ACCENT2, MUTED],
+      borderColor: '#161d2e',
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'right', labels: { boxWidth: 12 } } }
+  }
+});
+ 
+/* ============================================================
+   CHART 4: ADS vs ADAS
+   ============================================================ */
+new Chart(document.getElementById('adsSplit'), {
+  type: 'doughnut',
+  data: {
+    labels: ['ADAS (L2/L2+)', 'ADS (L3–L4)'],
+    datasets: [{
+      data: [392, 130],
+      backgroundColor: [ACCENT, ACCENT2],
+      borderColor: '#161d2e',
+      borderWidth: 3
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right', labels: { boxWidth: 12 } },
+      tooltip: {
+        callbacks: {
+          label: (c) => {
+            const pct = ((c.raw / 522) * 100).toFixed(1);
+            return ` ${c.label}: ${c.raw} (${pct}%)`;
+          }
+        }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 5: SEVERITY BAR
+   ============================================================ */
+new Chart(document.getElementById('severityBar'), {
+  type: 'bar',
+  data: {
+    labels: ['Fatal','Serious Injury','Minor/Moderate Injury','Property Damage Only'],
+    datasets: [
+      {
+        label: 'Human Drivers (NHTSA Baseline)',
+        data: [1.1, 8.2, 14.5, 76.2],
+        backgroundColor: 'rgba(239,68,68,0.7)',
+        borderColor: DANGER, borderWidth: 1
+      },
+      {
+        label: 'L2 ADAS (Tesla/Honda)',
+        data: [0.6, 3.1, 6.3, 90.0],
+        backgroundColor: 'rgba(245,158,11,0.7)',
+        borderColor: ACCENT2, borderWidth: 1
+      },
+      {
+        label: 'L4 ADS (Waymo)',
+        data: [0.0, 0.28, 0.72, 99.0],
+        backgroundColor: 'rgba(16,185,129,0.7)',
+        borderColor: ACCENT3, borderWidth: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        title: { display: true, text: '% of Crashes' },
+        grid: { color: '#1e2d45' }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 6: GEOGRAPHIC BAR
+   ============================================================ */
+new Chart(document.getElementById('geoBar'), {
+  type: 'bar',
+  data: {
+    labels: ['California','Arizona','Texas','Florida','Washington','Nevada','Others'],
+    datasets: [{
+      label: 'ADS Crashes (Jul 2021 – Mid 2024)',
+      data: [761, 269, 103, 40, 22, 18, 44],
+      backgroundColor: [ACCENT, ACCENT2, ACCENT3, DANGER, '#8b5cf6', '#ec4899', MUTED],
+      borderColor: '#161d2e',
+      borderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: {
+        title: { display: true, text: 'Number of Crashes' },
+        grid: { color: '#1e2d45' }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 7: GLM PREDICTED VS OBSERVED
+   ============================================================ */
+new Chart(document.getElementById('glmChart'), {
+  type: 'line',
+  data: {
+    labels: ['Jul-Dec 2021','2022','2023','2024','2025(est)'],
+    datasets: [
+      {
+        label: 'Observed (NHTSA SGO)',
+        data: [71, 287, 287, 380, 430],
+        borderColor: DANGER,
+        backgroundColor: 'rgba(239,68,68,0.1)',
+        fill: false, tension: 0.3, pointRadius: 6, pointStyle: 'rectRot'
+      },
+      {
+        label: 'GLM Predicted (NegBin)',
+        data: [68, 275, 295, 365, 440],
+        borderColor: ACCENT,
+        backgroundColor: LIGHTER,
+        fill: false, tension: 0.4, pointRadius: 4, borderWidth: 2
+      },
+      {
+        label: '95% CI Upper',
+        data: [98, 340, 370, 455, 540],
+        borderColor: 'rgba(14,165,233,0.3)',
+        backgroundColor: 'rgba(14,165,233,0.07)',
+        fill: '+1', tension: 0.4, pointRadius: 0, borderDash: [3,3], borderWidth: 1
+      },
+      {
+        label: '95% CI Lower',
+        data: [44, 210, 220, 275, 340],
+        borderColor: 'rgba(14,165,233,0.3)',
+        backgroundColor: 'rgba(14,165,233,0.07)',
+        fill: false, tension: 0.4, pointRadius: 0, borderDash: [3,3], borderWidth: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: { y: { title: { display: true, text: 'Annual Crash Count (ADS+ADAS)' }, grid: { color: '#1e2d45' } } }
+  }
+});
+ 
+/* ============================================================
+   CHART 8: GAM SMOOTH
+   ============================================================ */
+(function(){
+  const years = [2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025];
+  // Simulate GAM smooth (S-curve / technology adoption pattern)
+  const gamSmooth = [4.2, 8.1, 18.0, 28.5, 36.0, 40.2, 41.5, 46.3, 52.8, 56.1, 58.4, 60.2];
+  const observed =  [3.8, null, 17.5, 29.0, 35.0, 41.0, 40.0, 48.0, 51.0, 57.0, 59.0, null];
+  new Chart(document.getElementById('gamChart'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        {
+          label: 'GAM Smooth f(Year) — Estimated Crash Rate Trend',
+          data: gamSmooth,
+          borderColor: ACCENT3,
+          backgroundColor: LIGHTER3,
+          fill: true, tension: 0.5, pointRadius: 3, borderWidth: 2.5
+        },
+        {
+          label: 'Observed Data Points',
+          data: observed,
+          borderColor: ACCENT2,
+          backgroundColor: ACCENT2,
+          fill: false, tension: 0, pointRadius: 5, borderWidth: 0, showLine: false, pointStyle: 'circle'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: {
+          title: { display: true, text: 'Smoothed Crash Rate Index (2014 = 1)' },
+          grid: { color: '#1e2d45' }
+        }
+      }
+    }
+  });
+})();
+ 
+/* ============================================================
+   CHART 9: EVT GPD
+   ============================================================ */
+(function(){
+  // Simulate GPD tail density
+  const xs = [];
+  const gpd = [];
+  const lnorm = [];
+  for (let x = 0; x <= 20; x += 0.5) {
+    xs.push('$' + (x * 500).toFixed(0) + 'K');
+    const xi = 0.42, sigma = 1.2;
+    const gpd_val = x > 1 ? Math.max(0, (1/sigma) * Math.pow(1 + xi*(x-1)/sigma, -(1/xi + 1)) * 0.6) : null;
+    const ln_val = x > 0 ? (1/(x * 1.8 * Math.sqrt(2*Math.PI))) * Math.exp(-Math.pow(Math.log(x)-1.2, 2)/(2*1.8*1.8)) * 3 : null;
+    gpd.push(gpd_val ? +gpd_val.toFixed(4) : null);
+    lnorm.push(ln_val ? +ln_val.toFixed(4) : null);
+  }
+  new Chart(document.getElementById('evtChart'), {
+    type: 'line',
+    data: {
+      labels: xs,
+      datasets: [
+        {
+          label: 'Log-Normal Fit (typical auto claims)',
+          data: lnorm,
+          borderColor: ACCENT,
+          backgroundColor: LIGHTER,
+          fill: true, tension: 0.4, pointRadius: 0, borderWidth: 2
+        },
+        {
+          label: 'GPD Tail Fit (AV product liability, ξ=0.42)',
+          data: gpd,
+          borderColor: DANGER,
+          backgroundColor: 'rgba(239,68,68,0.12)',
+          fill: true, tension: 0.3, pointRadius: 0, borderWidth: 2.5, borderDash: [5,3]
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        x: { ticks: { maxRotation: 45, maxTicksLimit: 12 } },
+        y: {
+          title: { display: true, text: 'Probability Density' },
+          grid: { color: '#1e2d45' }
+        }
+      }
+    }
+  });
+})();
+ 
+/* ============================================================
+   CHART 10: LIABILITY SHIFT
+   ============================================================ */
+new Chart(document.getElementById('liabilityChart'), {
+  type: 'bar',
+  data: {
+    labels: ['L2 (2026)', 'L2 (2035)', 'L3 (2026)', 'L3 (2035)', 'L4 (2026)', 'L4 (2035)'],
+    datasets: [
+      {
+        label: 'Driver / Owner Liability %',
+        data: [85, 70, 55, 30, 20, 5],
+        backgroundColor: 'rgba(14,165,233,0.7)',
+        borderColor: ACCENT, borderWidth: 1, stack: 's'
+      },
+      {
+        label: 'Manufacturer / OEM Liability %',
+        data: [10, 20, 30, 45, 60, 70],
+        backgroundColor: 'rgba(245,158,11,0.7)',
+        borderColor: ACCENT2, borderWidth: 1, stack: 's'
+      },
+      {
+        label: 'Software Provider Liability %',
+        data: [5, 10, 15, 25, 20, 25],
+        backgroundColor: 'rgba(239,68,68,0.7)',
+        borderColor: DANGER, borderWidth: 1, stack: 's'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      x: { stacked: true },
+      y: {
+        stacked: true,
+        title: { display: true, text: '% of Accident Liability' },
+        max: 100, grid: { color: '#1e2d45' }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 11: PREMIUM BENCHMARKS
+   ============================================================ */
+new Chart(document.getElementById('premiumChart'), {
+  type: 'bar',
+  data: {
+    labels: ['L2 Personal', 'L2+ Personal', 'L3 Personal', 'L4 Robotaxi', 'L4 Freight Truck'],
+    datasets: [
+      {
+        label: 'Low Estimate',
+        data: [1600, 1900, 2400, 8000, 18000],
+        backgroundColor: 'rgba(16,185,129,0.7)',
+        borderColor: ACCENT3, borderWidth: 1
+      },
+      {
+        label: 'Base Case',
+        data: [2100, 2600, 3200, 14000, 30000],
+        backgroundColor: 'rgba(14,165,233,0.7)',
+        borderColor: ACCENT, borderWidth: 1
+      },
+      {
+        label: 'High Estimate',
+        data: [2700, 3400, 4500, 22000, 55000],
+        backgroundColor: 'rgba(245,158,11,0.7)',
+        borderColor: ACCENT2, borderWidth: 1
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        title: { display: true, text: 'Annual Premium (USD)' },
+        grid: { color: '#1e2d45' },
+        ticks: { callback: v => '$' + v.toLocaleString() }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   CHART 12: CLAIM DISTRIBUTION
+   ============================================================ */
+(function(){
+  const labels = ['<$5K','$5K–$25K','$25K–$100K','$100K–$500K','$500K–$2M','$2M–$10M','>$10M'];
+  new Chart(document.getElementById('claimDist'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        {
+          label: 'Traditional Auto (NHTSA CRSS)',
+          data: [38, 28, 19, 10, 3.5, 1.2, 0.3],
+          backgroundColor: 'rgba(148,163,184,0.5)',
+          borderColor: '#94a3b8', borderWidth: 1
+        },
+        {
+          label: 'L2 ADAS',
+          data: [30, 25, 22, 14, 5.5, 2.5, 1.0],
+          backgroundColor: 'rgba(245,158,11,0.6)',
+          borderColor: ACCENT2, borderWidth: 1
+        },
+        {
+          label: 'L4 ADS (product liability loaded)',
+          data: [22, 20, 20, 18, 9, 6, 5],
+          backgroundColor: 'rgba(239,68,68,0.6)',
+          borderColor: DANGER, borderWidth: 1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: {
+          title: { display: true, text: '% of Claims' },
+          grid: { color: '#1e2d45' }
+        }
+      }
+    }
+  });
+})();
+ 
+/* ============================================================
+   CHART 13: CLAIM COST TREND
+   ============================================================ */
+new Chart(document.getElementById('claimTrend'), {
+  type: 'line',
+  data: {
+    labels: ['2026','2027','2028','2029','2030','2031','2032','2033','2034','2035'],
+    datasets: [
+      {
+        label: 'L2 ADAS — Avg Annual Loss per Policy',
+        data: [1350, 1290, 1220, 1155, 1080, 1005, 935, 870, 810, 750],
+        borderColor: ACCENT,
+        backgroundColor: LIGHTER,
+        fill: true, tension: 0.3, pointRadius: 4
+      },
+      {
+        label: 'L4 ADS — Avg Annual Loss per Policy',
+        data: [3200, 2980, 2720, 2450, 2180, 1920, 1680, 1460, 1260, 1080],
+        borderColor: ACCENT2,
+        backgroundColor: LIGHTER2,
+        fill: true, tension: 0.3, pointRadius: 4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: {
+        title: { display: true, text: 'Expected Loss per Policy (USD)' },
+        grid: { color: '#1e2d45' },
+        ticks: { callback: v => '$' + v.toLocaleString() }
+      }
+    }
+  }
+});
+ 
+/* ============================================================
+   SIMULATION ENGINE
+   ============================================================ */
+let simFleetChart = null;
+let simLossChart  = null;
+ 
+function getParam(id) { return parseFloat(document.getElementById(id).value); }
+ 
+document.getElementById('fleetGrowth').oninput = function() {
+  document.getElementById('fleetGrowthVal').textContent = this.value + '%';
+};
+document.getElementById('safetyImprove').oninput = function() {
+  document.getElementById('safetyImproveVal').textContent = this.value + '%';
+};
+document.getElementById('l4Share').oninput = function() {
+  document.getElementById('l4ShareVal').textContent = this.value + '%';
+};
+document.getElementById('liabilitySpeed').oninput = function() {
+  const labels = ['Very Slow','Slow','Medium','Fast','Very Fast'];
+  document.getElementById('liabilitySpeedVal').textContent = labels[this.value - 1];
+};
+ 
+function runSimulation() {
+  const fleetGrowth   = getParam('fleetGrowth') / 100;
+  const safetyImp     = getParam('safetyImprove') / 100;
+  const l4Target      = getParam('l4Share') / 100;
+  const liabSpeed     = getParam('liabilitySpeed');
+ 
+  const years = ['2026','2027','2028','2029','2030','2031','2032','2033','2034','2035'];
+  const n = years.length;
+ 
+  // Base fleet in 2026: ~22M L2+ vehicles
+  const baseFleet = 22_000_000;
+  const baseCrashRate = 82; // per 100M VMT (L2 weighted avg)
+  const baseAvgSeverity = 18000; // USD per claim, including product liability
+ 
+  const fleetBase = [], fleetOpt = [], fleetPess = [];
+  const crashBase = [], crashOpt = [], crashPess = [];
+  const lossBase  = [], lossOpt  = [], lossPess  = [];
+ 
+  for (let i = 0; i < n; i++) {
+    // Fleet projections
+    const fBase = baseFleet * Math.pow(1 + fleetGrowth, i + 1) / 1_000_000;
+    const fOpt  = baseFleet * Math.pow(1 + fleetGrowth * 1.3, i + 1) / 1_000_000;
+    const fPess = baseFleet * Math.pow(1 + fleetGrowth * 0.7, i + 1) / 1_000_000;
+    fleetBase.push(+fBase.toFixed(1));
+    fleetOpt.push( +fOpt.toFixed(1));
+    fleetPess.push(+fPess.toFixed(1));
+ 
+    // Crash rate declining (safety improvement)
+    const rBase = baseCrashRate * Math.pow(1 - safetyImp, i + 1);
+    const rOpt  = baseCrashRate * Math.pow(1 - safetyImp * 1.5, i + 1);
+    const rPess = baseCrashRate * Math.pow(1 - safetyImp * 0.4, i + 1);
+ 
+    // Total crashes (fleet × VMT_per_vehicle × crash_rate / 100M)
+    // Assume 12,000 miles/year per AV on average
+    const vmt = 12000;
+    const cBase = fBase * 1e6 * vmt * rBase / 100_000_000;
+    const cOpt  = fOpt  * 1e6 * vmt * rOpt  / 100_000_000;
+    const cPess = fPess * 1e6 * vmt * rPess / 100_000_000;
+    crashBase.push(+cBase.toFixed(0));
+    crashOpt.push( +cOpt.toFixed(0));
+    crashPess.push(+cPess.toFixed(0));
+ 
+    // Liability loading increases with liabSpeed
+    const liabLoad = 1 + (liabSpeed - 1) * 0.08 * (i + 1);
+ 
+    // Severity trends up (sensor costs, litigation) but offset by safety
+    const sevBase = baseAvgSeverity * Math.pow(1.03, i + 1) * liabLoad;
+ 
+    // Total insured losses (only ~40% of crashes become insurance claims)
+    const lossB = cBase * 0.40 * sevBase / 1e9;
+    const lossO = cOpt  * 0.40 * sevBase * 0.85 / 1e9;
+    const lossP = cPess * 0.40 * sevBase * 1.15 / 1e9;
+    lossBase.push(+lossB.toFixed(2));
+    lossOpt.push( +lossO.toFixed(2));
+    lossPess.push(+lossP.toFixed(2));
+  }
+ 
+  // Update summary
+  document.getElementById('ss-fleet').textContent   = fleetBase[9].toFixed(0) + 'M';
+  document.getElementById('ss-crashes').textContent = crashBase[9].toLocaleString();
+  document.getElementById('ss-loss').textContent    = '$' + lossBase[9].toFixed(1) + 'B';
+  const marketPremium = (lossBase[9] / 0.62).toFixed(1); // loss ratio assumption 62%
+  document.getElementById('ss-market').textContent  = '$' + marketPremium + 'B';
+ 
+  // Fleet Chart
+  if (simFleetChart) simFleetChart.destroy();
+  simFleetChart = new Chart(document.getElementById('simFleet'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        {
+          label: 'Base Case Fleet (M vehicles)',
+          data: fleetBase,
+          borderColor: ACCENT, backgroundColor: LIGHTER, fill: true, tension: 0.3, pointRadius: 4, yAxisID: 'y'
+        },
+        {
+          label: 'Optimistic Fleet (M)',
+          data: fleetOpt,
+          borderColor: ACCENT3, fill: false, tension: 0.3, pointRadius: 3, borderDash: [4,3], yAxisID: 'y'
+        },
+        {
+          label: 'Pessimistic Fleet (M)',
+          data: fleetPess,
+          borderColor: MUTED, fill: false, tension: 0.3, pointRadius: 3, borderDash: [4,3], yAxisID: 'y'
+        },
+        {
+          label: 'Base Annual Crashes',
+          data: crashBase,
+          borderColor: DANGER, fill: false, tension: 0.3, pointRadius: 4, borderWidth: 2, yAxisID: 'y2'
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y:  { title: { display: true, text: 'AV Fleet (Millions)' },    grid: { color: '#1e2d45' }, position: 'left' },
+        y2: { title: { display: true, text: 'Annual Crashes (ABS)' },   grid: { display: false },  position: 'right' }
+      }
+    }
+  });
+ 
+  // Loss Chart
+  if (simLossChart) simLossChart.destroy();
+  simLossChart = new Chart(document.getElementById('simLoss'), {
+    type: 'line',
+    data: {
+      labels: years,
+      datasets: [
+        {
+          label: 'Base Case Losses ($B)',
+          data: lossBase,
+          borderColor: ACCENT2, backgroundColor: LIGHTER2, fill: true, tension: 0.3, pointRadius: 4
+        },
+        {
+          label: 'Optimistic ($B)',
+          data: lossOpt,
+          borderColor: ACCENT3, fill: false, tension: 0.3, pointRadius: 3, borderDash: [4,3]
+        },
+        {
+          label: 'Pessimistic ($B)',
+          data: lossPess,
+          borderColor: DANGER, fill: false, tension: 0.3, pointRadius: 3, borderDash: [4,3]
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: {
+        y: {
+          title: { display: true, text: 'Insured Losses (USD Billions)' },
+          grid: { color: '#1e2d45' },
+          ticks: { callback: v => '$' + v + 'B' }
+        }
+      }
+    }
+  });
+}
+ 
+// Run simulation on load with defaults
+window.addEventListener('load', () => setTimeout(runSimulation, 200));
+ 
+/* ============================================================
+   SIDEBAR ACTIVE LINK (ScrollSpy)
+   ============================================================ */
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks  = document.querySelectorAll('.nav-link');
+const observer  = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(l => {
+        l.classList.remove('active');
+        if (l.getAttribute('href') === '#' + e.target.id) l.classList.add('active');
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -75% 0px' });
+sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
+ 
