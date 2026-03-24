@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>starscream Saver — AI Autonomous Vehicle Insurance Research Report</title>
+  <title>starscream Saver - AI Autonomous Vehicle Insurance Research Report</title>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jstat/1.9.6/jstat.min.js"></script>
   <style>
@@ -410,9 +410,9 @@
     <a class="nav-link" href="#geographic">Geographic Distribution</a>
  
     <span class="nav-section">Statistical Models</span>
-    <a class="nav-link" href="#glm-model">GLM — Crash Frequency</a>
-    <a class="nav-link" href="#gam-model">GAM — Trend Smoothing</a>
-    <a class="nav-link" href="#evt-model">EVT — Tail Risk</a>
+    <a class="nav-link" href="#glm-model">GLM - Crash Frequency</a>
+    <a class="nav-link" href="#gam-model">GAM - Trend Smoothing</a>
+    <a class="nav-link" href="#evt-model">EVT - Tail Risk</a>
     <a class="nav-link" href="#liability-shift">Liability Shift Model</a>
  
     <span class="nav-section">Projections</span>
@@ -442,7 +442,7 @@
       <h1>AI-Driven Autonomous Vehicle<br/><span>Insurance Risk Framework</span></h1>
       <p class="cover-sub">
         A comprehensive actuarial study of accident frequency, severity, and liability
-        in AI-operated vehicles — with 10-year simulation models, GLM/GAM/EVT statistical
+        in AI-operated vehicles - with 10-year simulation models, GLM/GAM/EVT statistical
         analysis, and projected insurance premium benchmarks for the starscream Saver product line.
       </p>
       <div class="cover-meta">
@@ -459,14 +459,14 @@
       <h3>Table of Contents</h3>
       <ol>
         <li>Executive Summary</li>
-        <li>Introduction — The AV Insurance Problem</li>
+        <li>Introduction - The AV Insurance Problem</li>
         <li>Historical Crash Data 2014–2026</li>
         <li>Company & Platform Breakdown</li>
         <li>Crash Severity & Injury Analysis</li>
         <li>Geographic Distribution (USA)</li>
         <li>GLM Crash-Frequency Model</li>
         <li>GAM Non-linear Trend Smoothing</li>
-        <li>EVT Extreme Value Theory — Tail Risk</li>
+        <li>EVT Extreme Value Theory - Tail Risk</li>
         <li>Liability Shift Modelling</li>
         <li>10-Year Crash & Exposure Simulation</li>
         <li>Insurance Premium Pricing Framework</li>
@@ -509,7 +509,7 @@
           <div class="kpi-label">Tesla Share of ADAS Crashes</div>
           <div class="kpi-value">~70%</div>
           <div class="kpi-unit">of all ADAS Reports</div>
-          <div class="kpi-trend">— Fleet-size adjusted lower</div>
+          <div class="kpi-trend">- Fleet-size adjusted lower</div>
         </div>
         <div class="kpi">
           <div class="kpi-label">Injury Rate Per Crash</div>
@@ -545,12 +545,12 @@
     <!-- ==================== SECTION 2: INTRODUCTION ==================== -->
     <section id="introduction">
       <div class="section-label">Section 02</div>
-      <h2>Introduction — The AV Insurance Problem</h2>
+      <h2>Introduction - The AV Insurance Problem</h2>
  
       <p>
         The automobile insurance industry was built on a simple premise: human drivers make
         mistakes, and insurers price that risk. Over 90% of all traditional vehicle accidents
-        in the United States are attributable to human error — distraction, impairment,
+        in the United States are attributable to human error - distraction, impairment,
         fatigue, and misjudgement. The rise of AI-driven autonomous vehicles fundamentally
         disrupts this model.
       </p>
@@ -626,8 +626,8 @@
         (2) the concentration of technology companies (Waymo, Tesla, Cruise, Aurora, Zoox)
         in Silicon Valley and the Sun Belt; and (3) the NHTSA's June 2021 Standing General
         Order on crash reporting, which created the world's most comprehensive public AV
-        incident database. As of 2026, California alone has recorded over 761 ADS crashes —
-        more than 60% of the national total — making it the primary actuarial laboratory
+        incident database. As of 2026, California alone has recorded over 761 ADS crashes -
+        more than 60% of the national total - making it the primary actuarial laboratory
         for this product.
       </p>
     </section>
@@ -637,7 +637,7 @@
     <!-- ==================== SECTION 3: HISTORICAL DATA ==================== -->
     <section id="historical-data">
       <div class="section-label">Section 03</div>
-      <h2>Historical Crash Data — 2014 to 2026</h2>
+      <h2>Historical Crash Data - 2014 to 2026</h2>
  
       <p>
         Before NHTSA's mandatory reporting order took effect in July 2021, AV incident data
@@ -655,7 +655,7 @@
       </div>
  
       <div class="chart-card">
-        <h3>Annual AV/ADAS Crash Incidents — USA (2014–2025)</h3>
+        <h3>Annual AV/ADAS Crash Incidents - USA (2014–2025)</h3>
         <p class="chart-subtitle">Reported incidents including ADS (L3–L5) and ADAS (L2–L2+). Pre-2021 figures are reconstructed estimates. Post-2021 are NHTSA SGO mandatory filings.</p>
         <div class="chart-wrap">
           <canvas id="crashTimeline" height="100"></canvas>
@@ -664,7 +664,7 @@
       </div>
  
       <div class="chart-card">
-        <h3>Crash Rate Per 100 Million Miles Travelled — AV vs Human Baseline</h3>
+        <h3>Crash Rate Per 100 Million Miles Travelled - AV vs Human Baseline</h3>
         <p class="chart-subtitle">Rate-per-mile normalisation reveals that rising absolute crash counts are largely a function of expanding fleet size. The underlying crash rate per VMT shows a divergent trend.</p>
         <div class="chart-wrap">
           <canvas id="rateChart" height="110"></canvas>
@@ -672,7 +672,7 @@
         <p class="cite">Sources: NHTSA FARS; Federal Highway Administration VMT Reports; Tesla FSD Vehicle Safety Report (2025); Swiss Re / Waymo Liability Claims Analysis (Dec 2024)</p>
       </div>
  
-      <h3>Key Milestones — AI Vehicle Safety Timeline</h3>
+      <h3>Key Milestones - AI Vehicle Safety Timeline</h3>
  
       <div class="table-wrap">
         <table>
@@ -694,7 +694,7 @@
             </tr>
             <tr>
               <td class="num">2016 May</td>
-              <td>First confirmed AV fatality — Joshua Brown, Tesla Autopilot, Florida</td>
+              <td>First confirmed AV fatality - Joshua Brown, Tesla Autopilot, Florida</td>
               <td>NHTSA opens PE16-007 formal investigation; autopilot failed to brake for crossing truck</td>
               <td>NHTSA</td>
             </tr>
@@ -712,7 +712,7 @@
             </tr>
             <tr>
               <td class="num">2021 Jun</td>
-              <td>NHTSA Standing General Order — mandatory crash reporting begins</td>
+              <td>NHTSA Standing General Order - mandatory crash reporting begins</td>
               <td>Foundation of modern AV accident data; reporting universe expands dramatically</td>
               <td>NHTSA</td>
             </tr>
@@ -773,13 +773,13 @@
  
       <div class="two-col">
         <div class="chart-card">
-          <h3>Crashes by Company — Cumulative 2021–2025</h3>
+          <h3>Crashes by Company - Cumulative 2021–2025</h3>
           <p class="chart-subtitle">Raw NHTSA SGO reports (not fleet-adjusted)</p>
           <canvas id="companyPie" height="200"></canvas>
           <p class="cite">Source: NHTSA SGO; CraftLawFirm (Jan 2026)</p>
         </div>
         <div class="chart-card">
-          <h3>ADS vs ADAS Split — 2022 Snapshot</h3>
+          <h3>ADS vs ADAS Split - 2022 Snapshot</h3>
           <p class="chart-subtitle">First full year of SGO mandatory data</p>
           <canvas id="adsSplit" height="200"></canvas>
           <p class="cite">Source: NHTSA June 2022 SGO Release; GovTech</p>
@@ -860,7 +860,7 @@
  
       <div class="callout">
         <strong>Actuarial Note:</strong> Tesla's dominance in crash counts is partly explained by
-        its unique telemetry-based reporting system — Tesla actively reports <em>all</em> crashes
+        its unique telemetry-based reporting system - Tesla actively reports <em>all</em> crashes
         within 30 seconds of ADAS engagement, while most peers rely on customer-initiated claims
         reporting (capturing only ~18% of police-reported crashes per NHTSA). This means Tesla
         figures are not directly comparable to other manufacturers without a correction factor
@@ -876,7 +876,7 @@
       <h2>Crash Severity & Injury Analysis</h2>
  
       <div class="chart-card">
-        <h3>Injury Severity Distribution — ADS vs ADAS vs Human Baseline</h3>
+        <h3>Injury Severity Distribution - ADS vs ADAS vs Human Baseline</h3>
         <p class="chart-subtitle">Percentage breakdown of reported crash outcomes. ADS (L4) shows markedly better outcomes; ADAS (L2) shows mixed results.</p>
         <canvas id="severityBar" height="110"></canvas>
         <p class="cite">Sources: NHTSA SGO 2022–2024; NHTSA CRSS National Baseline; RamosLaw AV Statistics; Swiss Re/Waymo Study Dec 2024</p>
@@ -942,7 +942,7 @@
       </p>
  
       <div class="chart-card">
-        <h3>ADS Crash Incidents by State — Cumulative 2021–2024</h3>
+        <h3>ADS Crash Incidents by State - Cumulative 2021–2024</h3>
         <p class="chart-subtitle">California accounts for ~60% of all reported ADS incidents nationally.</p>
         <canvas id="geoBar" height="110"></canvas>
         <p class="cite">Sources: NHTSA SGO Dashboard; Montana Legislative Interim Committee AV Crash Data Summary (Jul 2024); RMDLaw AV Statistics (Oct 2025)</p>
@@ -1010,8 +1010,8 @@
  
     <!-- ==================== SECTION 7: GLM ==================== -->
     <section id="glm-model">
-      <div class="section-label">Section 07 — Statistical Models</div>
-      <h2>GLM — Generalised Linear Model (Crash Frequency)</h2>
+      <div class="section-label">Section 07 - Statistical Models</div>
+      <h2>GLM - Generalised Linear Model (Crash Frequency)</h2>
  
       <p>
         A Generalised Linear Model with a <strong>Negative Binomial</strong> distribution
@@ -1038,7 +1038,7 @@
               <td>Intercept (β₀)</td>
               <td class="num">−4.82</td>
               <td class="num">0.31</td>
-              <td>—</td>
+              <td>-</td>
               <td>Baseline log-rate at 2021 reference level</td>
             </tr>
             <tr>
@@ -1080,7 +1080,7 @@
               <td>Dispersion (α)</td>
               <td class="num">2.14</td>
               <td class="num">0.22</td>
-              <td>—</td>
+              <td>-</td>
               <td>Confirms overdispersion; Negative Binomial appropriate over Poisson</td>
             </tr>
           </tbody>
@@ -1091,12 +1091,12 @@
         <strong>Actuarial Insight:</strong> The negative sign on the L4 coefficient (−1.43) 
         is the single most important finding for starscream Saver's pricing strategy.
         It indicates that fully autonomous Level 4 vehicles, when VMT-normalised,
-        represent substantially <em>lower</em> claim frequency risk than L2 ADAS —
+        represent substantially <em>lower</em> claim frequency risk than L2 ADAS -
         but the individual claim severity is higher when incidents do occur (due to
         product liability loading and technology repair costs).
       </div>
  
-      <h3>Predicted Claim Frequency — GLM Output</h3>
+      <h3>Predicted Claim Frequency - GLM Output</h3>
       <div class="chart-card">
         <h3>GLM Predicted vs Observed Crashes per 100M VMT</h3>
         <p class="chart-subtitle">Model fit on 2021–2025 data. Shaded band = 95% confidence interval.</p>
@@ -1110,7 +1110,7 @@
     <!-- ==================== SECTION 8: GAM ==================== -->
     <section id="gam-model">
       <div class="section-label">Section 08</div>
-      <h2>GAM — Generalised Additive Model (Non-linear Trend)</h2>
+      <h2>GAM - Generalised Additive Model (Non-linear Trend)</h2>
  
       <p>
         The GLM's linear trend assumption is potentially too restrictive for AV crash data,
@@ -1157,17 +1157,17 @@
     <!-- ==================== SECTION 9: EVT ==================== -->
     <section id="evt-model">
       <div class="section-label">Section 09</div>
-      <h2>EVT — Extreme Value Theory (Tail Risk & Catastrophic Claims)</h2>
+      <h2>EVT - Extreme Value Theory (Tail Risk & Catastrophic Claims)</h2>
  
       <p>
         Standard GLM/GAM models capture expected loss well but underestimate
-        <strong>tail risk</strong> — the probability of large, catastrophic claims
+        <strong>tail risk</strong> - the probability of large, catastrophic claims
         arising from systemic software failures, recall events, or fleet-wide cyber incidents.
         Extreme Value Theory (EVT) using the <strong>Peaks Over Threshold (POT)</strong>
         method with a Generalised Pareto Distribution (GPD) is appropriate for this analysis.
       </p>
  
-      <h3>Model Specification — GPD Tail Model</h3>
+      <h3>Model Specification - GPD Tail Model</h3>
       <div class="formula">
         For excess losses above threshold u:
         P(X > u + y | X > u) ≈ (1 + ξy/σ)^(−1/ξ)    [Generalised Pareto Distribution]
@@ -1178,7 +1178,7 @@
       </div>
  
       <div class="chart-card">
-        <h3>GPD Tail Fit — Simulated Claim Severity Distribution</h3>
+        <h3>GPD Tail Fit - Simulated Claim Severity Distribution</h3>
         <p class="chart-subtitle">Based on NHTSA injury data, product liability award precedents, and Tesla/Waymo settlement ranges. GPD fit above $500K threshold.</p>
         <canvas id="evtChart" height="120"></canvas>
         <p class="cite">Sources: NHTSA ODI EA22002 injury data; Casualty Actuarial Society AV Report 2018; Boston University AV Liability Study; press-reported settlements</p>
@@ -1242,7 +1242,7 @@
       <h3>Estimated GPD Parameters from Available Data</h3>
       <div class="formula">
         Threshold u        = $500,000 (90th percentile of AV bodily injury claims)
-        Shape ξ            = 0.42  (heavy tail — consistent with product liability litigation)
+        Shape ξ            = 0.42  (heavy tail - consistent with product liability litigation)
         Scale σ            = $1,200,000
         Expected shortfall (99% VaR): ~ $18.7M per single catastrophic event
         Estimated 99.5% VaR (Solvency II equivalent): ~ $47M aggregate annual
@@ -1264,13 +1264,13 @@
       </p>
  
       <div class="chart-card">
-        <h3>Projected Liability Attribution by Automation Level — 2026 vs 2035</h3>
+        <h3>Projected Liability Attribution by Automation Level - 2026 vs 2035</h3>
         <p class="chart-subtitle">Estimated percentage of accident costs borne by driver vs manufacturer/software provider, by SAE level.</p>
         <canvas id="liabilityChart" height="130"></canvas>
         <p class="cite">Sources: S&P Global Mobility AV Insurance Outlook (Sep 2025); Morningstar / Actuarial Post (Sep 2024); CAS AV Task Force Report; Inszone Insurance AV Report (Jan 2026)</p>
       </div>
  
-      <h3>Liability Shift — Financial Impact on Premiums</h3>
+      <h3>Liability Shift - Financial Impact on Premiums</h3>
       <p>
         The Casualty Actuarial Society (2018) modelled a full product-liability regime
         for all vehicles and found that shifting from personal auto to product liability
@@ -1282,7 +1282,7 @@
       <p>
         For a 2026 baseline of approximately $1,800–$2,200 average personal auto premium,
         the equivalent product-liability-loaded AV premium could reach <strong>$3,500–$5,500
-        per vehicle per year</strong> for L4 operators in the transitional period —
+        per vehicle per year</strong> for L4 operators in the transitional period -
         before sufficient actuarial data exists to validate lower loss rates and drive
         premiums down.
       </p>
@@ -1299,7 +1299,7 @@
  
     <!-- ==================== SECTION 11: 10-YEAR SIMULATION ==================== -->
     <section id="10yr-simulation">
-      <div class="section-label">Section 11 — Projections</div>
+      <div class="section-label">Section 11 - Projections</div>
       <h2>10-Year Simulation (2026–2035)</h2>
  
       <p>
@@ -1333,13 +1333,13 @@
       </div>
  
       <div class="chart-card">
-        <h3>Simulated AV Fleet Size & Annual Crashes — 2026–2035</h3>
+        <h3>Simulated AV Fleet Size & Annual Crashes - 2026–2035</h3>
         <p class="chart-subtitle">Three scenarios: Base case, Optimistic (faster safety improvement), Pessimistic (slower improvement + higher growth). Adjust controls above and re-run.</p>
         <canvas id="simFleet" height="110"></canvas>
       </div>
  
       <div class="chart-card">
-        <h3>Projected Annual Insurance Losses — USA AV Market (USD Billions)</h3>
+        <h3>Projected Annual Insurance Losses - USA AV Market (USD Billions)</h3>
         <p class="chart-subtitle">Combined expected loss (GLM frequency × average severity) plus EVT tail loading. Excludes cyber and systemic risk.</p>
         <canvas id="simLoss" height="110"></canvas>
       </div>
@@ -1347,22 +1347,22 @@
       <div id="simSummary" class="summary-grid" style="margin-top:1.5rem;">
         <div class="summary-item">
           <div class="si-label">Est. Total AV Fleet 2035 (Base)</div>
-          <div class="si-val" id="ss-fleet">—</div>
+          <div class="si-val" id="ss-fleet">-</div>
           <div class="si-note">L2+ vehicles on US roads</div>
         </div>
         <div class="summary-item">
           <div class="si-label">Annual Crashes 2035 (Base)</div>
-          <div class="si-val" id="ss-crashes">—</div>
+          <div class="si-val" id="ss-crashes">-</div>
           <div class="si-note">Absolute; rate per VMT declining</div>
         </div>
         <div class="summary-item">
           <div class="si-label">Estimated Insured Loss 2035</div>
-          <div class="si-val" id="ss-loss">—</div>
+          <div class="si-val" id="ss-loss">-</div>
           <div class="si-note">USD billions, AV-specific market</div>
         </div>
         <div class="summary-item">
           <div class="si-label">Market Size Opportunity 2035</div>
-          <div class="si-val" id="ss-market">—</div>
+          <div class="si-val" id="ss-market">-</div>
           <div class="si-note">Premiums written, AV-specific products</div>
         </div>
       </div>
@@ -1395,9 +1395,9 @@
           Expense = Acquisition + Administration + Profit margin
       </div>
  
-      <h3>Indicative Premium Ranges by AV Level — 2026</h3>
+      <h3>Indicative Premium Ranges by AV Level - 2026</h3>
       <div class="chart-card">
-        <h3>Annual Premium Benchmarks by Automation Level — USA 2026</h3>
+        <h3>Annual Premium Benchmarks by Automation Level - USA 2026</h3>
         <p class="chart-subtitle">Commercial fleet and personal policies. Premium range reflects uncertainty loading (data immaturity) and ODD complexity variation.</p>
         <canvas id="premiumChart" height="130"></canvas>
         <p class="cite">Sources: CAS AV Task Force (2018 baseline); S&P Global AV Insurance Outlook (Sep 2025); Inszone Insurance AV Report (Jan 2026); starscream Saver actuarial projection</p>
@@ -1464,7 +1464,7 @@
         <strong>Long-Term Trajectory:</strong> Goldman Sachs projects a 50%+ reduction
         in personal auto insurance costs over 15 years as AV penetration rises.
         starscream Saver should build a <em>declining rate schedule</em> into multi-year
-        policies — offering customers rate guarantees that lock in 5–10% annual
+        policies - offering customers rate guarantees that lock in 5–10% annual
         reductions conditional on fleet safety data. This creates a powerful
         acquisition tool while managing adverse selection risk.
       </div>
@@ -1478,13 +1478,13 @@
       <h2>Claim Value Distribution & Forecast</h2>
  
       <div class="chart-card">
-        <h3>Claim Severity Distribution — AV vs Traditional Auto (Simulated)</h3>
+        <h3>Claim Severity Distribution - AV vs Traditional Auto (Simulated)</h3>
         <p class="chart-subtitle">Log-normal body injury distributions. AV L4 shows lower frequency but heavier tail due to product liability litigation multiplier.</p>
         <canvas id="claimDist" height="130"></canvas>
         <p class="cite">Sources: NHTSA CRSS/CISS; CAS AV Task Force; Boston Univ. AV Liability Study; press-reported Tesla/Waymo settlements</p>
       </div>
  
-      <h3>Average Claim Value Benchmarks — 2026 Estimates</h3>
+      <h3>Average Claim Value Benchmarks - 2026 Estimates</h3>
       <div class="table-wrap">
         <table>
           <thead>
@@ -1537,7 +1537,7 @@
       </div>
  
       <div class="chart-card">
-        <h3>Projected Annual Claim Costs per Policy — 2026–2035 (Base Case)</h3>
+        <h3>Projected Annual Claim Costs per Policy - 2026–2035 (Base Case)</h3>
         <p class="chart-subtitle">Expected loss per policy, trending down as safety technology matures. Does not include tail/catastrophe loading.</p>
         <canvas id="claimTrend" height="110"></canvas>
         <p class="cite">Sources: starscream Saver actuarial projection; Goldman Sachs AV Insurance Note (Jun 2025); S&P Global AV Insurance Outlook (Sep 2025)</p>
@@ -1595,7 +1595,7 @@
             </tr>
             <tr>
               <td><span class="badge badge-green">Optional</span></td>
-              <td>Physical Damage — Sensor Coverage</td>
+              <td>Physical Damage - Sensor Coverage</td>
               <td>Damage to AV sensors (LiDAR, radar, cameras)</td>
               <td>Actual cash value + $8K sensor uplift</td>
               <td>ADAS/ADS sensor repair costs typically 2–4× standard</td>
@@ -1701,7 +1701,7 @@
         Pricing must use exposure-based (per-mile) rather than flat-rate models.
       </p>
       <p>
-        <strong>2. Liability is shifting — but not uniformly or quickly.</strong>
+        <strong>2. Liability is shifting - but not uniformly or quickly.</strong>
         The GLM model confirms L4 systems carry ~76% lower frequency per VMT vs L2.
         However, individual claim severity is higher due to product liability litigation
         multipliers. The CAS estimates product liability can double or triple average premiums
@@ -1709,14 +1709,14 @@
       </p>
       <p>
         <strong>3. EVT analysis reveals catastrophic risk is real and under-priced industry-wide.</strong>
-        The heavy-tailed GPD fit (ξ = 0.42) indicates that systemic events — recall-scale
-        software defects, fleet-wide cyber compromise — present materially unbounded loss scenarios.
+        The heavy-tailed GPD fit (ξ = 0.42) indicates that systemic events - recall-scale
+        software defects, fleet-wide cyber compromise - present materially unbounded loss scenarios.
         CAT reinsurance and aggregate stop-loss provisions are non-negotiable.
       </p>
       <p>
         <strong>4. Data quality is the primary competitive moat.</strong>
-        The company with the best telematics data — operating mode, software version,
-        EDR logs — will out-price and out-select competitors. Mandatory telematics for
+        The company with the best telematics data - operating mode, software version,
+        EDR logs - will out-price and out-select competitors. Mandatory telematics for
         all AV policyholders is both an underwriting necessity and a product differentiator.
       </p>
  
@@ -1725,14 +1725,14 @@
         <table>
           <thead><tr><th>#</th><th>Recommendation</th><th>Priority</th><th>Timeline</th></tr></thead>
           <tbody>
-            <tr><td>1</td><td>Launch with L2/L2+ personal auto product first — most data, fastest market entry</td><td><span class="badge badge-red">Critical</span></td><td>2026 Q3</td></tr>
+            <tr><td>1</td><td>Launch with L2/L2+ personal auto product first - most data, fastest market entry</td><td><span class="badge badge-red">Critical</span></td><td>2026 Q3</td></tr>
             <tr><td>2</td><td>Develop modular operating-mode-triggered policy form with telematics API integrations (Tesla, GM, Waymo)</td><td><span class="badge badge-red">Critical</span></td><td>2026 Q4</td></tr>
             <tr><td>3</td><td>Secure catastrophe reinsurance treaty with $50M+ aggregate limit before L4 commercial fleet underwriting</td><td><span class="badge badge-red">Critical</span></td><td>Pre-launch</td></tr>
             <tr><td>4</td><td>Build proprietary actuarial database of AV telematics and claims data as core IP asset</td><td><span class="badge badge-yellow">High</span></td><td>Ongoing</td></tr>
-            <tr><td>5</td><td>Design declining-rate multi-year policies as acquisition tool — lock in 5–8% annual rate reductions tied to fleet safety data</td><td><span class="badge badge-yellow">High</span></td><td>2027</td></tr>
+            <tr><td>5</td><td>Design declining-rate multi-year policies as acquisition tool - lock in 5–8% annual rate reductions tied to fleet safety data</td><td><span class="badge badge-yellow">High</span></td><td>2027</td></tr>
             <tr><td>6</td><td>Include regulatory change provision in all policies; monitor 46 state AV liability law developments</td><td><span class="badge badge-yellow">High</span></td><td>All policies</td></tr>
-            <tr><td>7</td><td>Partner with OEMs (not just brokers) to access real-time vehicle data — position as embedded insurance within vehicle HMI</td><td><span class="badge badge-green">Medium</span></td><td>2027–2028</td></tr>
-            <tr><td>8</td><td>Develop cyber/software risk sub-product as standalone — market will grow as connectivity increases</td><td><span class="badge badge-green">Medium</span></td><td>2027–2028</td></tr>
+            <tr><td>7</td><td>Partner with OEMs (not just brokers) to access real-time vehicle data - position as embedded insurance within vehicle HMI</td><td><span class="badge badge-green">Medium</span></td><td>2027–2028</td></tr>
+            <tr><td>8</td><td>Develop cyber/software risk sub-product as standalone - market will grow as connectivity increases</td><td><span class="badge badge-green">Medium</span></td><td>2027–2028</td></tr>
           </tbody>
         </table>
       </div>
@@ -1754,28 +1754,28 @@
             <tr>
               <td>1</td>
               <td>NHTSA</td>
-              <td>Standing General Order on ADS/ADAS Crash Reporting — SGO Dashboard</td>
+              <td>Standing General Order on ADS/ADAS Crash Reporting - SGO Dashboard</td>
               <td>2021–2026</td>
               <td><a href="https://www.nhtsa.gov/laws-regulations/standing-general-order-crash-reporting" target="_blank">nhtsa.gov</a></td>
             </tr>
             <tr>
               <td>2</td>
               <td>NHTSA ODI</td>
-              <td>Investigation EA22002 — Tesla Autopilot Critical Safety Gap Report</td>
+              <td>Investigation EA22002 - Tesla Autopilot Critical Safety Gap Report</td>
               <td>2024</td>
               <td><a href="https://static.nhtsa.gov/odi/inv/2022/INCR-EA22002-14496.pdf" target="_blank">static.nhtsa.gov</a></td>
             </tr>
             <tr>
               <td>3</td>
               <td>NHTSA ODI</td>
-              <td>PE16-007 — Tesla Autopilot Williston Florida Fatal Crash Investigation</td>
+              <td>PE16-007 - Tesla Autopilot Williston Florida Fatal Crash Investigation</td>
               <td>2016–2018</td>
               <td><a href="https://static.nhtsa.gov/odi/inv/2016/INCLA-PE16007-7876.PDF" target="_blank">static.nhtsa.gov</a></td>
             </tr>
             <tr>
               <td>4</td>
               <td>Swiss Re / Waymo</td>
-              <td>Waymo Liability Claims Analysis — 92% BI reduction vs human drivers</td>
+              <td>Waymo Liability Claims Analysis - 92% BI reduction vs human drivers</td>
               <td>Dec 2024</td>
               <td><a href="https://fortune.com/2025/06/11/goldman-sachs-autonomous-cars-insurance-costs-fault-accidents/" target="_blank">fortune.com</a></td>
             </tr>
@@ -1803,7 +1803,7 @@
             <tr>
               <td>8</td>
               <td>Casualty Actuarial Society</td>
-              <td>Automated Vehicles and the Insurance Industry — AV Task Force Report</td>
+              <td>Automated Vehicles and the Insurance Industry - AV Task Force Report</td>
               <td>2018</td>
               <td><a href="https://www.casact.org/sites/default/files/2021-02/pubs_forum_18spforum_01_avtf_2018_report.pdf" target="_blank">casact.org</a></td>
             </tr>
@@ -1824,14 +1824,14 @@
             <tr>
               <td>11</td>
               <td>Wikipedia / NHTSA</td>
-              <td>List of Tesla Autopilot Crashes — Comprehensive incident timeline</td>
+              <td>List of Tesla Autopilot Crashes - Comprehensive incident timeline</td>
               <td>Feb 2026</td>
               <td><a href="https://en.wikipedia.org/wiki/List_of_Tesla_Autopilot_crashes" target="_blank">wikipedia.org</a></td>
             </tr>
             <tr>
               <td>12</td>
               <td>DiMarco Araujo Montevideo</td>
-              <td>Waymo Accident Statistics — NHTSA Crash Data Analysis 2021–2025</td>
+              <td>Waymo Accident Statistics - NHTSA Crash Data Analysis 2021–2025</td>
               <td>Feb 2026</td>
               <td><a href="https://www.damfirm.com/waymo-accident-statistics.html" target="_blank">damfirm.com</a></td>
             </tr>
@@ -1845,7 +1845,7 @@
             <tr>
               <td>14</td>
               <td>Montana Legislature / NHTSA</td>
-              <td>General Crash Statistics & AV Context — Transportation Interim Committee</td>
+              <td>General Crash Statistics & AV Context - Transportation Interim Committee</td>
               <td>Jul 2024</td>
               <td><a href="https://archive.legmt.gov/content/Committees/Interim/2023-2024/Transportation/Meetings/241007-July-10-2024/03.020-nhtsa-av-crash-data-summary-2024-posting2.pdf" target="_blank">legmt.gov</a></td>
             </tr>
@@ -1883,7 +1883,7 @@
     </section>
  
     <div class="page-footer">
-      <strong>starscream Saver Inc.</strong> — Actuarial Research Division<br/>
+      <strong>starscream Saver Inc.</strong> - Actuarial Research Division<br/>
       This report was prepared for internal strategic planning purposes. All projections are
       model-based estimates with inherent uncertainty. Premium figures are indicative only and
       do not constitute filed rates. Actuarial assumptions should be reviewed annually as
@@ -2196,7 +2196,7 @@ new Chart(document.getElementById('glmChart'), {
       labels: years,
       datasets: [
         {
-          label: 'GAM Smooth f(Year) — Estimated Crash Rate Trend',
+          label: 'GAM Smooth f(Year) - Estimated Crash Rate Trend',
           data: gamSmooth,
           borderColor: ACCENT3,
           backgroundColor: LIGHTER3,
@@ -2410,14 +2410,14 @@ new Chart(document.getElementById('claimTrend'), {
     labels: ['2026','2027','2028','2029','2030','2031','2032','2033','2034','2035'],
     datasets: [
       {
-        label: 'L2 ADAS — Avg Annual Loss per Policy',
+        label: 'L2 ADAS - Avg Annual Loss per Policy',
         data: [1350, 1290, 1220, 1155, 1080, 1005, 935, 870, 810, 750],
         borderColor: ACCENT,
         backgroundColor: LIGHTER,
         fill: true, tension: 0.3, pointRadius: 4
       },
       {
-        label: 'L4 ADS — Avg Annual Loss per Policy',
+        label: 'L4 ADS - Avg Annual Loss per Policy',
         data: [3200, 2980, 2720, 2450, 2180, 1920, 1680, 1460, 1260, 1080],
         borderColor: ACCENT2,
         backgroundColor: LIGHTER2,
